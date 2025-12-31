@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "How to Overcome Fear",
+    "img":"https://images.unsplash.com/photo-1625674967351-655dfa7362c7?q=80&w=1334&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "A guide to overcoming personal fears and challenges through mindfulness and positive thinking.",
+    "category": "Personal Growth",
+    "emotionalTone": "Empowering",
+    "creator": {
+      "name": "John Doe",
+      "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-10-01",
+    "detailsLink": "/life-lesson/1"
+  },
+  {
+    "id": 2,
+    "title": "The Power of Gratitude",
+    "img":"https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Explore how practicing gratitude can transform your mental and emotional well-being.",
+    "category": "Mental Health",
+    "emotionalTone": "Positive",
+    "creator": {
+      "name": "Jane Smith",
+     "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-11-15",
+    "detailsLink": "/life-lesson/2"
+  },
+  {
+    "id": 3,
+    "title": "Building Healthy Relationships",
+    "img":"https://plus.unsplash.com/premium_photo-1683887033858-be37b32f17a9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Tips for creating and maintaining strong, healthy relationships in personal and professional life.",
+    "category": "Relationships",
+    "emotionalTone": "Inspirational",
+    "creator": {
+      "name": "Michael Brown",
+      "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-09-22",
+    "detailsLink": "/life-lesson/3"
+  },
+  {
+    "id": 4,
+    "title": "Achieving Career Success",
+    "img":"https://images.unsplash.com/photo-1655337690727-5224680c8c07?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Steps to take for success in your career, from goal-setting to networking.",
+    "category": "Career",
+    "emotionalTone": "Motivational",
+    "creator": {
+      "name": "Emily White",
+      "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-08-30",
+    "detailsLink": "/life-lesson/4"
+  },
+  {
+    "id": 5,
+    "title": "Self-Love and Acceptance",
+   "img":"https://images.unsplash.com/photo-1655337690727-5224680c8c07?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Learn how to accept yourself, love who you are, and stop seeking validation from others.",
+    "category": "Self-Improvement",
+    "emotionalTone": "Healing",
+    "creator": {
+      "name": "Sarah Green",
+     "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-07-19",
+    "detailsLink": "/life-lesson/5"
+  },
+  {
+    "id": 6,
+    "title": "Mastering Time Management",
+  "img":"https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Techniques to manage your time effectively and increase productivity.",
+    "category": "Productivity",
+    "emotionalTone": "Practical",
+    "creator": {
+      "name": "David Lee",
+     "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-06-12",
+    "detailsLink": "/life-lesson/6"
+  },
+  {
+    "id": 7,
+    "title": "Dealing with Stress and Anxiety",
+    "img":"https://images.unsplash.com/photo-1625674967351-655dfa7362c7?q=80&w=1334&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "shortDescription": "Practical advice and techniques to cope with stress and reduce anxiety.",
+    "category": "Mental Health",
+    "emotionalTone": "Calming",
+    "creator": {
+      "name": "Anna Kim",
+     "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-05-05",
+    "detailsLink": "/life-lesson/7"
+  },
+  {
+    "id": 8,
+    "title": "Finding Inner Peace",
+    "img":"https://media.istockphoto.com/id/1409722748/photo/students-raising-hands-while-teacher-asking-them-questions-in-classroom.jpg?s=612x612&w=0&k=20&c=NbVChOV9wIbQOhUD6BqpouZHHBbyQ2rkSjaVfIhpMv8=",
+    "shortDescription": "Learn how to achieve inner peace and balance through meditation and mindfulness.",
+    "category": "Spirituality",
+    "emotionalTone": "Peaceful",
+    "creator": {
+      "name": "Peter Black",
+     "photo": "https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    "accessLevel": "Public",
+    "createdDate": "2023-04-18",
+    "detailsLink": "/life-lesson/8"
+  }
+]

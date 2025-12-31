@@ -1,0 +1,371 @@
+import React, { useState } from "react";
+import { Link } from "react-router";
+import useAxios from "../../hooks/useAxios";
+
+const Premium = () => {
+  const [isPremiumUser, setIsPremiumUser] = useState(false);
+  const axios = useAxios();
+
+  const handlePayment = async () => {
+    try {
+      const res = await axios.post("/create-checkout-session", {
+        success_url: `${window.location.origin}/premium?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${window.location.origin}/premium`,
+      });
+
+      // Stripe checkout redirect
+      window.location.href = res.data.url;
+      setIsPremiumUser(true);
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert("Payment failed. Please try again.");
+    }
+  };
+
+  const initialCards = [
+   {
+    "id": 101,
+    "title": "Finding Inner Peace – Mastery Edition",
+    "shortDescription": "A deep, guided journey into lasting inner peace and emotional balance.",
+    "longDescription": "This premium lesson explores advanced meditation, mindfulness rituals, breathwork techniques, and emotional grounding practices designed to cultivate deep inner peace and resilience in daily life.",
+    "category": "Spirituality",
+    "emotionalTone": "Deeply Peaceful",
+    "creator": {
+      "name": "Peter Black",
+      "photo": "https://example.com/images/peter-black.jpg",
+      "credentials": "Certified Mindfulness Coach & Meditation Teacher"
+    },
+    "accessLevel": "Premium",
+    "price": 19.99,
+    "duration": "2h 30m",
+    "premiumFeatures": [
+      "Guided audio meditations",
+      "Downloadable mindfulness workbook",
+      "Daily peace rituals",
+      "Lifetime access"
+    ],
+    "createdDate": "2023-04-18",
+    "detailsLink": "/premium-life-lesson/101"
+  },
+  {
+    "id": 102,
+    "title": "Emotional Healing Blueprint",
+    "shortDescription": "Heal emotional wounds and restore inner harmony.",
+    "longDescription": "A transformational program focusing on emotional release, forgiveness practices, and self-compassion exercises.",
+    "category": "Emotional Wellness",
+    "emotionalTone": "Healing",
+    "creator": {
+      "name": "Sarah Collins",
+      "photo": "https://example.com/images/sarah-collins.jpg",
+      "credentials": "Emotional Wellness Therapist"
+    },
+    "accessLevel": "Premium",
+    "price": 24.99,
+    "duration": "3h",
+    "premiumFeatures": [
+      "Emotional release exercises",
+      "Guided journaling prompts",
+      "Therapeutic audio sessions"
+    ],
+    "createdDate": "2023-05-10",
+    "detailsLink": "/premium-life-lesson/102"
+  },
+  {
+    "id": 103,
+    "title": "Mindfulness for High Performers",
+    "shortDescription": "Achieve peak focus without burnout.",
+    "longDescription": "Learn how to integrate mindfulness into high-pressure environments while maintaining clarity and balance.",
+    "category": "Mindfulness",
+    "emotionalTone": "Focused",
+    "creator": {
+      "name": "Daniel Wright",
+      "photo": "https://example.com/images/daniel-wright.jpg",
+      "credentials": "Performance Coach"
+    },
+    "accessLevel": "Premium",
+    "price": 29.99,
+    "duration": "2h",
+    "premiumFeatures": [
+      "Focus training sessions",
+      "Stress management tools",
+      "Performance tracking sheets"
+    ],
+    "createdDate": "2023-06-02",
+    "detailsLink": "/premium-life-lesson/103"
+  },
+  {
+    "id": 104,
+    "title": "Self-Love & Confidence Masterclass",
+    "shortDescription": "Build unshakable confidence from within.",
+    "longDescription": "A premium masterclass focused on self-worth, confidence building, and eliminating self-doubt.",
+    "category": "Personal Growth",
+    "emotionalTone": "Empowering",
+    "creator": {
+      "name": "Emily Stone",
+      "photo": "https://example.com/images/emily-stone.jpg",
+      "credentials": "Self-Development Coach"
+    },
+    "accessLevel": "Premium",
+    "price": 21.99,
+    "duration": "2h 15m",
+    "premiumFeatures": [
+      "Confidence exercises",
+      "Affirmation audios",
+      "Self-reflection tools"
+    ],
+    "createdDate": "2023-06-20",
+    "detailsLink": "/premium-life-lesson/104"
+  },
+  {
+    "id": 105,
+    "title": "Spiritual Awakening Path",
+    "shortDescription": "Awaken your higher consciousness.",
+    "longDescription": "Explore spiritual awareness, intuition development, and higher consciousness practices.",
+    "category": "Spirituality",
+    "emotionalTone": "Awakening",
+    "creator": {
+      "name": "Liam Harper",
+      "photo": "https://example.com/images/liam-harper.jpg",
+      "credentials": "Spiritual Guide"
+    },
+    "accessLevel": "Premium",
+    "price": 34.99,
+    "duration": "4h",
+    "premiumFeatures": [
+      "Guided awakening meditations",
+      "Energy alignment practices",
+      "Spiritual journaling"
+    ],
+    "createdDate": "2023-07-05",
+    "detailsLink": "/premium-life-lesson/105"
+  },
+  {
+    "id": 106,
+    "title": "Overcoming Anxiety Naturally",
+    "shortDescription": "Practical tools to calm the anxious mind.",
+    "longDescription": "A step-by-step system to manage anxiety through mindfulness, breathing, and lifestyle changes.",
+    "category": "Mental Health",
+    "emotionalTone": "Calming",
+    "creator": {
+      "name": "Dr. Rachel Moore",
+      "photo": "https://example.com/images/rachel-moore.jpg",
+      "credentials": "Clinical Psychologist"
+    },
+    "accessLevel": "Premium",
+    "price": 27.99,
+    "duration": "3h 30m",
+    "premiumFeatures": [
+      "Anxiety relief techniques",
+      "Breathing guides",
+      "Progress tracking tools"
+    ],
+    "createdDate": "2023-07-22",
+    "detailsLink": "/premium-life-lesson/106"
+  },
+  {
+    "id": 107,
+    "title": "The Art of Letting Go",
+    "shortDescription": "Release emotional baggage and move forward.",
+    "longDescription": "Learn how to release past pain, attachments, and limiting beliefs.",
+    "category": "Emotional Wellness",
+    "emotionalTone": "Liberating",
+    "creator": {
+      "name": "Anna Reed",
+      "photo": "https://example.com/images/anna-reed.jpg",
+      "credentials": "Life Coach"
+    },
+    "accessLevel": "Premium",
+    "price": 18.99,
+    "duration": "2h",
+    "premiumFeatures": [
+      "Letting-go rituals",
+      "Guided reflection audios",
+      "Emotional detox exercises"
+    ],
+    "createdDate": "2023-08-01",
+    "detailsLink": "/premium-life-lesson/107"
+  },
+  {
+    "id": 108,
+    "title": "Morning Rituals for Inner Balance",
+    "shortDescription": "Start each day grounded and focused.",
+    "longDescription": "Design powerful morning rituals to set the tone for peace and productivity.",
+    "category": "Lifestyle",
+    "emotionalTone": "Balanced",
+    "creator": {
+      "name": "Michael Grant",
+      "photo": "https://example.com/images/michael-grant.jpg",
+      "credentials": "Wellness Strategist"
+    },
+    "accessLevel": "Premium",
+    "price": 16.99,
+    "duration": "1h 45m",
+    "premiumFeatures": [
+      "Customizable rituals",
+      "Morning meditation audios",
+      "Habit-building planner"
+    ],
+    "createdDate": "2023-08-18",
+    "detailsLink": "/premium-life-lesson/108"
+  },
+  {
+    "id": 109,
+    "title": "Deep Relaxation & Stress Reset",
+    "shortDescription": "Reset your nervous system.",
+    "longDescription": "A deeply restorative experience using body scans, breathwork, and guided relaxation.",
+    "category": "Stress Management",
+    "emotionalTone": "Relaxing",
+    "creator": {
+      "name": "Sophia Lane",
+      "photo": "https://example.com/images/sophia-lane.jpg",
+      "credentials": "Relaxation Therapist"
+    },
+    "accessLevel": "Premium",
+    "price": 22.99,
+    "duration": "2h 45m",
+    "premiumFeatures": [
+      "Deep relaxation audios",
+      "Stress reset routines",
+      "Sleep enhancement guides"
+    ],
+    "createdDate": "2023-09-01",
+    "detailsLink": "/premium-life-lesson/109"
+  },
+  {
+    "id": 110,
+    "title": "Building Mental Resilience",
+    "shortDescription": "Stay strong through life’s challenges.",
+    "longDescription": "Learn psychological tools to develop resilience, adaptability, and inner strength.",
+    "category": "Mental Strength",
+    "emotionalTone": "Motivational",
+    "creator": {
+      "name": "James Walker",
+      "photo": "https://example.com/images/james-walker.jpg",
+      "credentials": "Resilience Coach"
+    },
+    "accessLevel": "Premium",
+    "price": 26.99,
+    "duration": "3h",
+    "premiumFeatures": [
+      "Resilience training",
+      "Mindset exercises",
+      "Real-life case studies"
+    ],
+    "createdDate": "2023-09-20",
+    "detailsLink": "/premium-life-lesson/110"
+  },
+  {
+    "id": 111,
+    "title": "Conscious Living Essentials",
+    "shortDescription": "Live with awareness and intention.",
+    "longDescription": "A holistic guide to mindful living, conscious choices, and intentional habits.",
+    "category": "Mindful Living",
+    "emotionalTone": "Awareness",
+    "creator": {
+      "name": "Olivia Brooks",
+      "photo": "https://example.com/images/olivia-brooks.jpg",
+      "credentials": "Conscious Living Mentor"
+    },
+    "accessLevel": "Premium",
+    "price": 23.99,
+    "duration": "2h 30m",
+    "premiumFeatures": [
+      "Lifestyle audits",
+      "Mindful habit trackers",
+      "Conscious living guides"
+    ],
+    "createdDate": "2023-10-05",
+    "detailsLink": "/premium-life-lesson/111"
+  },
+  {
+    "id": 112,
+    "title": "Meditation Mastery Program",
+    "shortDescription": "From beginner to advanced meditation.",
+    "longDescription": "A complete meditation system covering techniques, posture, breath control, and deep states of awareness.",
+    "category": "Meditation",
+    "emotionalTone": "Serene",
+    "creator": {
+      "name": "Peter Black",
+      "photo": "https://example.com/images/peter-black.jpg",
+      "credentials": "Certified Meditation Teacher"
+    },
+    "accessLevel": "Premium",
+    "price": 39.99,
+    "duration": "5h",
+    "premiumFeatures": [
+      "Beginner to advanced lessons",
+      "Guided and silent meditations",
+      "Progress milestones"
+    ],
+    "createdDate": "2023-10-22",
+    "detailsLink": "/premium-life-lesson/112"
+  }
+  ];
+
+  return (
+    <div className="min-h-screen px-6 py-16 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <h2 className="text-5xl text-center font-extrabold mb-12 bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent">
+        Premium Lessons
+      </h2>
+
+      {/* Upgrade Button */}
+      <div className="text-center mb-12">
+        <button
+          onClick={handlePayment}
+          className="px-12 py-4 text-xl font-bold rounded-full bg-gradient-to-r from-amber-400 to-orange-500 hover:scale-105 transition transform shadow-lg text-white"
+        >
+          Upgrade to Premium
+        </button>
+      </div>
+
+      {/* Lesson Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {initialCards.map((data) => (
+          <div
+            key={data.id}
+            className={`relative overflow-hidden rounded-2xl shadow-xl transform hover:scale-105 transition duration-500`}
+          >
+            {/* Gradient Header */}
+            <div
+              className={`h-32 bg-gradient-to-r ${data.color} flex items-center justify-center text-white font-bold text-xl`}
+            >
+              {data.title}
+            </div>
+
+            <div className="p-6 bg-white">
+              <p className="text-gray-700 text-sm mb-4">{data.shortDescription}</p>
+
+              <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
+                <span className="font-semibold">Category: </span>
+                <span>{data.category}</span>
+              </div>
+              <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
+                <span className="font-semibold">Emotion: </span>
+                <span>{data.emotionalTone}</span>
+              </div>
+              <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
+                <span className="font-semibold">Created: </span>
+                <span>{data.createdDate}</span>
+              </div>
+
+              <Link to={data.detailsLink}>
+                <button
+                  disabled={!isPremiumUser}
+                  className={`w-full py-2 rounded-full text-white font-semibold shadow-lg transition transform ${
+                    isPremiumUser
+                      ? "bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105"
+                      : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                >
+                  View Lesson
+                </button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Premium;

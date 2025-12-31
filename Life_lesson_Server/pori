@@ -1,0 +1,532 @@
+	This is for task 
+1️. HTML কী?
+উত্তর:
+ HTML (HyperText Markup Language) হলো একটি markup language, যা দিয়ে ওয়েব পেজের structure তৈরি করা হয়।
+2️.HTML এবং CSS এর পার্থক্য কী?
+উত্তর:
+HTML → ওয়েব পেজের structure তৈরি করে
+
+
+CSS → ওয়েব পেজের design ও layout নিয়ন্ত্রণ করে
+
+
+3️. HTML Tag কী?
+উত্তর:
+ Tag হলো HTML এর element, যা < > এর ভিতরে লেখা হয়।
+ উদাহরণ: <p>, <h1>, <div>
+4️. Element এবং Tag এর পার্থক্য কী?
+উত্তর:
+Tag: <p>
+
+
+Element: <p>Hello</p> (opening tag + content + closing tag)
+5️. HTML Attribute কী?
+উত্তর:
+ Attribute ট্যাগের অতিরিক্ত তথ্য দেয়।
+ উদাহরণ:
+<img src="image.jpg" alt="photo">
+6 HTML5 কী?
+উত্তর:
+ HTML5 হলো HTML এর সর্বশেষ version, যেখানে semantic tag, audio, video, canvas ইত্যাদি নতুন feature যোগ হয়েছে।
+7 Semantic Tag কী?
+উত্তর:
+ যেসব tag দেখে content এর অর্থ বোঝা যায় সেগুলো Semantic tag।
+ উদাহরণ: <header>, <footer>, <article>, <section>
+8 <div> এবং <span> এর পার্থক্য কী?
+উত্তর:
+<div> → Block-level element
+
+
+<span> → Inline element
+
+
+9 Block-level element কী?
+উত্তর:
+ যে element পুরো width নেয় এবং নতুন লাইনে শুরু হয়।
+ উদাহরণ: <div>, <p>, <h1>
+10 Inline element কী?
+উত্তর:
+ যে element শুধুমাত্র প্রয়োজনীয় জায়গা নেয়।
+ উদাহরণ: <span>, <a>, <img>
+11 HTML Form কী?
+উত্তর:
+ Form ব্যবহার করা হয় user থেকে data নেওয়ার জন্য।
+ উদাহরণ:
+<form>
+  <input type="text">
+  <button>Submit</button>
+</form>
+12 id এবং class এর পার্থক্য কী?
+উত্তর:
+id → unique (একবার ব্যবহার হয়)
+
+
+class → multiple element এ ব্যবহার করা যায়
+
+
+13 <head> ট্যাগে কী থাকে?
+উত্তর:
+ <title>, <meta>, <link>, <style> ইত্যাদি থাকে — যা browser কে information দেয়।
+14 <img> ট্যাগে alt attribute কেন দরকার?
+উত্তর:
+Image না লোড হলে text দেখায়
+
+
+SEO এবং screen reader এর জন্য গুরুত্বপূর্ণ
+
+
+15 HTML Comment কীভাবে লিখতে হয়?
+উত্তর:
+<!-- This is a comment →
+
+
+CSS
+
+1 CSক
+উত্তর:
+ CSS (Cascading Style Sheets) ব্যবহার করা হয় HTML element গুলোর design, layout এবং responsive behavior নিয়ন্ত্রণ করার জন্য।
+2 CSS লেখার কয়টি উপায় আছে?
+উত্তর:
+ ৩টি উপায় আছে:
+Inline CSS
+
+
+Internal CSS
+
+
+External CSS (সবচেয়ে recommended)
+3 CSS Selector কী?
+উত্তর:
+ Selector দিয়ে নির্দিষ্ট HTML element select করে style দেওয়া হয়।
+ উদাহরণ:
+p { color: red; }
+4 Class এবং ID selector এর পার্থক্য কী?
+উত্তর:
+Class (.) → multiple element এ ব্যবহার করা যায়
+
+
+ID (#) → unique, একবার ব্যবহার হয়
+5 CSS Specificity কী?
+উত্তর:
+ একই element এ একাধিক style apply হলে কোনটা priority পাবে তা নির্ধারণ করে specificity।
+6 CSS Box Model কী?
+উত্তর:
+ Box Model = Content + Padding + Border + Margin
+7 display property কী?
+উত্তর:
+ Element কিভাবে render হবে তা নির্ধারণ করে।
+ উদাহরণ: block, inline, inline-block, none
+8 position property এর ধরন কী কী?
+উত্তর:
+static
+
+
+relative
+
+
+absolute
+
+
+fixed
+
+
+sticky
+9 z-index কী?
+উত্তর:
+ Element এর stacking order নির্ধারণ করে (position থাকতে হয়)।
+10 Flexbox কী?
+উত্তর:
+ 1D layout system (row বা column) যেটা alignment সহজ করে।
+11 Grid এবং Flexbox পার্থক্য কী?
+উত্তর:
+Flexbox → 1D layout
+
+
+Grid → 2D layout (row + column)
+
+
+12 Responsive Design কী?
+উত্তর:
+ সব screen size (mobile, tablet, desktop) এ সুন্দরভাবে layout adjust হওয়াকে Responsive Design বলে।
+13 Media Query কী?
+উত্তর:
+ Screen size অনুযায়ী CSS apply করার পদ্ধতি।
+@media (max-width: 768px) {
+  body { background: lightgray; }
+}
+
+14 overflow property কী?
+উত্তর:
+ Content overflow হলে কী হবে তা নির্ধারণ করে।
+ hidden, scroll, auto, visible
+15 !important কখন ব্যবহার করা উচিত?
+উত্তর:
+ খুব প্রয়োজন ছাড়া ব্যবহার করা উচিত না।
+ Debug বা third-party CSS override করতে ব্যবহার করা যায়।
+
+
+
+
+		This is for my practise
+
+1 HTML Parsing কী?
+উত্তর:
+ Browser HTML file কে DOM Tree এ convert করার process কেই HTML parsing বলে।
+
+2 DOM কী?
+উত্তর:
+ DOM (Document Object Model) হলো HTML document এর tree structure representation, যেটা JavaScript দিয়ে manipulate করা যায়।
+3 Critical Rendering Path কী?
+উত্তর:
+ Browser যেভাবে HTML → CSS → JS process করে screen এ content দেখায়, সেটাই Critical Rendering Path।
+4 Doctype কেন দরকার?
+উত্তর:
+ Browser কে জানায় কোন HTML version ব্যবহার করা হয়েছে।
+ না দিলে browser Quirks Mode এ চলে যায়।
+<!DOCTYPE html>
+
+5 Quirks Mode কী?
+উত্তর:
+ পুরনো browser behavior অনুসরণ করার mode, যা layout সমস্যা তৈরি করে।
+6 HTML5 এ নতুন কী কী API আছে?
+উত্তর:
+Geolocation API
+
+
+Web Storage
+
+
+Drag & Drop
+
+
+Canvas API
+
+
+Web Workers
+
+
+7 Web Storage এবং Cookie পার্থক্য?
+উত্তর:
+Feature
+Web Storage
+Cookie
+Size
+~5MB
+~4KB
+Speed
+Faster
+Slower
+Server
+যায় না
+Server এ যায়
+
+
+
+8 localStorage ও sessionStorage পার্থক্য?
+উত্তর:
+localStorage → browser বন্ধ করলেও data থাকে
+
+
+sessionStorage → tab বন্ধ হলে data delete
+
+
+9 HTML Accessibility কী?
+উত্তর:
+ সব user (blind, disabled) যেন website ব্যবহার করতে পারে — সেটাই accessibility 
+ 10 ARIA কী?
+উত্তর:
+ ARIA (Accessible Rich Internet Applications) screen reader কে extra info দেয়।
+<button aria-label="Close"></button>
+
+11 SEO friendly HTML কীভাবে লেখা হয়?
+উত্তর:
+Semantic tags
+
+
+Proper heading order
+
+
+Meta tags
+
+
+Alt attribute
+
+
+Clean structure
+
+
+12 <meta charset="UTF-8"> কেন দরকার?
+উত্তর:
+ Special character (বাংলা, emoji) সঠিকভাবে দেখানোর জন্য।
+13 <script> tag head এ দিলে সমস্যা কী?
+উত্তর:
+ HTML rendering block হয়।
+ Solution:
+<script defer src="app.js"></script>
+
+1️⃣4️⃣ async ও defer পার্থক্য?
+উত্তর:
+async
+defer
+Parallel load
+Parallel load
+Immediately execute
+HTML parse শেষে execute
+Order maintain করে না
+Order maintain করে
+
+
+15 Void Element কী?
+উত্তর:
+ যেসব tag এর closing tag নেই।
+ উদাহরণ: <img>, <br>, <hr>
+16 Data Attribute কী?
+উত্তর:
+ Custom data রাখার জন্য।
+<div data-id="123"></div>
+17 HTML Template Tag কী?
+উত্তর:
+ Invisible HTML block যা JS দিয়ে render করা হয়।
+<template id="card"></template>
+
+18 <picture> tag কেন ব্যবহার হয়?
+উত্তর:
+ Responsive image লোড করার জন্য।
+19 Canvas ও SVG পার্থক্য?
+উত্তর:
+Canvas
+SVG
+Pixel based
+Vector based
+JS heavy
+CSS friendly
+Performance fast
+Scalable
+
+
+20 Shadow DOM কী?
+উত্তর:
+ Component এর private DOM, যা বাহিরের CSS/JS থেকে isolate থাকে।
+21 Custom Element কী?
+উত্তর:
+ নিজস্ব HTML tag বানানো।
+<my-card></my-card>
+
+22 Web Component কী?
+উত্তর:
+ Custom Element + Shadow DOM + Template = Web Component
+23 HTML Sanitization কেন দরকার?
+উত্তর:
+ XSS attack থেকে বাঁচার জন্য user input sanitize করা জরুরি।
+24 XSS কী?
+উত্তর:
+ Malicious JavaScript inject করার attack।
+25 CSP (Content Security Policy) কী?
+উত্তর:
+ Browser কে বলে দেয় কোন resource load করা যাবে।
+
+26 <noscript> tag কী?
+উত্তর:
+ JavaScript disabled থাকলে fallback content দেখায়।
+27 HTML Lazy Loading কী?
+উত্তর:
+ Image/video প্রয়োজন হলে লোড হয়।
+<img loading="lazy">
+
+28 HTML Minification কী?
+উত্তর:
+ Extra space/comment remove করে file size কমানো।
+29 Iframe Security Risk কী?
+উত্তর:
+ Clickjacking, XSS
+ Solution: sandbox attribute
+30 <base> tag কী?
+উত্তর:
+ Relative URL এর base path define করে।
+31 Progressive Enhancement কী?
+উত্তর:
+ Basic HTML → CSS → JS enhancement strategy
+32 HTML Validation কেন দরকার?
+উত্তর:
+ Error-free, cross-browser compatibility নিশ্চিত করতে।
+33 <main> tag এর rule কী?
+উত্তর:
+ একটি page এ মাত্র একবার ব্যবহার করা যাবে।
+34 <section> vs <article> পার্থক্য?
+উত্তর:
+article → independent content
+
+
+section → grouped content
+
+
+35 HTML Rendering Optimization কিভাবে করা যায়?
+উত্তর:
+Semantic HTML
+
+
+Defer scripts
+
+
+Lazy loading
+
+
+Minify HTML
+
+CSS
+
+1 CSS Rendering Process কী?
+উত্তর:
+ Browser → CSSOM তৈরি করে → DOM এর সাথে merge করে → Render Tree → Layout → Paint।
+2 CSSOM কী?
+উত্তর:
+ CSS Object Model, যা browser CSS parse করে তৈরি করে।
+
+3 Reflow এবং Repaint পার্থক্য?
+উত্তর:
+Reflow: layout change (costly)
+
+
+Repaint: color/visual change
+
+
+
+4 CSS Specificity Calculation কীভাবে হয়?
+উত্তর:
+ Inline > ID > Class > Element
+
+5 !important specificity কিভাবে প্রভাবিত করে?
+উত্তর:
+ সব rule override করে (bad practice)।
+
+6 BEM Methodology কী?
+উত্তর:
+ Maintainable CSS লেখার naming convention।
+ block__element--modifier
+
+7 CSS Preprocessor কী?
+উত্তর:
+ CSS কে power-up করে (variables, nesting)।
+ উদাহরণ: SASS, LESS
+
+8 CSS Variables (--var) কী?
+উত্তর:
+ Runtime এ change করা যায় এমন variable।
+:root { --main: red; }
+
+
+9 rem এবং em পার্থক্য?
+উত্তর:
+em → parent এর উপর depend
+
+
+rem → root (html) এর উপর depend
+
+
+10 vh, vw pitfalls কী?
+উত্তর:
+ Mobile browser address bar সমস্যা তৈরি করে।
+
+11 Stacking Context কী?
+উত্তর:
+ position + z-index নতুন stacking context তৈরি করে।
+
+12 contain property কী?
+উত্তর:
+ Layout/paint isolate করে performance বাড়ায়।
+
+13 CSS Isolation কী?
+উত্তর:
+ Component CSS leak হওয়া বন্ধ করা।
+
+14 will-change কখন ব্যবহার করা উচিত?
+উত্তর:
+ Animation এর আগে performance optimize করতে।
+
+15 GPU acceleration কীভাবে হয়?
+উত্তর:
+ transform, opacity ব্যবহার করলে GPU trigger হয়।
+16 object-fit কী?
+উত্তর:
+ Image/video container এ fit করায়।
+17 aspect-ratio কেন দরকার?
+উত্তর:
+ Layout shift prevent করে।
+18 CSS Logical Properties কী?
+উত্তর:
+ RTL/LTR friendly property।
+margin-inline-start
+
+19 @layer কী?
+উত্তর:
+ CSS priority manage করার নতুন feature।
+
+20 Container Query কী?
+উত্তর:
+ Parent size অনুযায়ী style change।
+
+21 :is() এবং :where() পার্থক্য?
+উত্তর:
+:is() → specificity রাখে
+
+
+:where() → specificity 0
+
+
+22 :has() pseudo-class কী?
+উত্তর:
+ Parent select করা যায় (game changer)
+23 CSS Animation vs Transition?
+উত্তর:
+Transition → simple state change
+
+
+Animation → complex timeline
+
+
+24 Keyframes কী?
+উত্তর:
+ Animation step define করে।
+25 Scroll Snap কী?
+উত্তর:
+ Scroll position snap করে।
+26 position: sticky কিভাবে কাজ করে?
+উত্তর:
+ Scroll করলে relative → fixed হয়।
+27 backdrop-filter কী?
+উত্তর:
+ Glassmorphism effect দেয়।
+28 CSS Masking কী?
+উত্তর:
+ Element এর visible area control
+29 Critical CSS কী?
+উত্তর:
+ Above-the-fold CSS inline করা।
+30 CSS Tree Shaking কী?
+উত্তর:
+ Unused CSS remove করা।
+31 PurgeCSS কী?
+উত্তর:
+ Unused CSS auto remove করে
+32 @supports কী?
+উত্তর:
+ Feature detection করে
+33 CSS Accessibility কিভাবে improve করা যায়?
+উত্তর:
+High contrast
+
+
+Focus styles
+
+
+Reduced motion
+
+
+34 prefers-reduced-motion কী?
+উত্তর:
+ User motion disable করলে respect করা
+35 CSS Architecture কেন গুরুত্বপূর্ণ?
+উত্তর:
+ Scalability, maintainability এবং performance এর জন্য
+
+
