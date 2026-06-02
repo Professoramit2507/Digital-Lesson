@@ -37,9 +37,7 @@ const Dashboard = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3 pr-4">
-            <button className="btn btn-ghost btn-circle hover:bg-white/20">
-              
-            </button>
+            <button className="btn btn-ghost btn-circle hover:bg-white/20"></button>
             <div className="avatar">
               <div className="w-9 rounded-full ring ring-white ring-offset-2 ring-offset-purple-600">
                 <img src="https://i.pravatar.cc/100" alt="User" />
