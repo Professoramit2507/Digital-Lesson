@@ -43,7 +43,6 @@ const Benefits = () => {
     },
   };
 
-  
   const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
@@ -55,12 +54,22 @@ const Benefits = () => {
   };
 
   return (
-    <section className="py-24 mt-2 bg-[#070b14] text-white rounded-2xl relative overflow-hidden">
+    <section className="w-full bg-[#070b14] py-24 text-white relative overflow-hidden border-t border-white/5">
       {/* 🌌 Background Soft Lights */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto text-center px-6 relative z-10">
+      {/* 🔄 Full Width Fluid Container */}
+      <div className="w-full px-6 md:px-16 lg:px-24 text-center relative z-10">
         
+        {/* 🏷️ Cyber Matrix Tagline */}
+        <motion.span 
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-[10px] font-bold tracking-[0.3em] text-cyan-400 uppercase mb-3 block font-mono"
+        >
+          // Value Core Matrix
+        </motion.span>
 
         {/* 🎯 Section Title */}
         <motion.h2 
@@ -78,7 +87,7 @@ const Benefits = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-gray-400 max-w-2xl mx-auto mb-16 text-sm md:text-base"
+          className="text-gray-400 max-w-2xl mx-auto mb-20 text-sm md:text-base leading-relaxed"
         >
           Real experiences shape who we are. Here’s why life lessons are more
           powerful than any rigid traditional classroom.
@@ -99,18 +108,18 @@ const Benefits = () => {
               whileHover={{ 
                 y: -10, 
                 scale: 1.02,
-                borderColor: "rgba(34, 211, 238, 0.4)",
-                boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.6)"
+                borderColor: "rgba(34, 211, 238, 0.35)",
+                boxShadow: "0px 25px 50px rgba(0, 0, 0, 0.5)"
               }}
-              className="relative p-8 bg-[#0f1424]/60 border border-white/5 rounded-2xl backdrop-blur-xl transition-all duration-300 text-left group"
+              className="relative p-8 bg-[#0f1424]/40 border border-white/5 rounded-2xl backdrop-blur-xl transition-all duration-300 text-left group overflow-hidden"
             >
               {/* ⚡ Card Background Subtle Hover Glow */}
               <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-[0.02] rounded-2xl transition-opacity duration-500`} />
 
               {/* 🔮 Glowing Icon Container */}
-              <div className="relative w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-6 bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+              <div className="relative w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-7 bg-white/5 border border-white/10 group-hover:scale-105 transition-transform duration-300">
                 {/* Icon Backlight */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-20 blur-md group-hover:opacity-50 transition-opacity`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-15 blur-md group-hover:opacity-40 transition-opacity`} />
                 <span className="relative z-10">{benefit.icon}</span>
               </div>
 
