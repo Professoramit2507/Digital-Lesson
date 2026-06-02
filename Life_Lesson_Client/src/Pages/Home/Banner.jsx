@@ -57,7 +57,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-6 px-4 relative group">
+    <div className="w-full mx-auto mt-2  relative group">
       {/* 🌟 Background Aura Glow */}
       <div className="absolute -inset-1 bg-linear-to-r from-cyan-500 to-blue-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-35 transition duration-700" />
 
