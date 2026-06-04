@@ -36,7 +36,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-lesson",
-        element:<PrivateRoute><AddLesson></AddLesson></PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <AddLesson></AddLesson>
+          </PrivateRoute>
+        ),
       },
       {
         path: "public-lesson",
@@ -54,10 +58,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "premium-lesson",
-        element: <PrivateRoute><Premimum></Premimum></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Premimum></Premimum>
+          </PrivateRoute>
+        ),
         loader: () => fetch("premium.json").then((res) => res.json()),
       },
-        {
+      {
         path: "/premium-lesson/:id",
         element: <LessonDetails></LessonDetails>,
         loader: async ({ params }) => {
@@ -92,7 +100,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute> ,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -118,31 +130,36 @@ export const router = createBrowserRouter([
         path: "payment-success",
         element: <PaymentSucces></PaymentSucces>,
       },
+    ],
+  },
+  {
+    path: "admin",
+    element: (
+      <AdminRoute>
+        <AdminDashboard></AdminDashboard>
+      </AdminRoute>
+    ),
+
+    children: [
       {
-        path: "admin",
-        element:<AdminRoute><AdminDashboard></AdminDashboard></AdminRoute> ,
-        children: [
-          {
-            index: true,
-            element: <AdminDashboardHome></AdminDashboardHome>,
-          },
-          {
-            path: "manage-user",
-            element: <ManageUser></ManageUser>,
-          },
-          {
-            path: "manage-lesson",
-            element: <ManageLesson></ManageLesson>,
-          },
-          {
-            path: "reported-lesson",
-            element: <ReportedLesson></ReportedLesson>,
-          },
-          {
-            path: "admin-profile",
-            element: <AdminProfile></AdminProfile>,
-          },
-        ],
+        index: true,
+        element: <AdminDashboardHome></AdminDashboardHome>,
+      },
+      {
+        path: "manage-user",
+        element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "manage-lesson",
+        element: <ManageLesson></ManageLesson>,
+      },
+      {
+        path: "reported-lesson",
+        element: <ReportedLesson></ReportedLesson>,
+      },
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
       },
     ],
   },

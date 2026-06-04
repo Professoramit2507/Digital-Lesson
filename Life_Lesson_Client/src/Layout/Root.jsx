@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navber from "../Pages/Shared/Navber";
 import { Outlet } from "react-router";
 import Footer from "../Pages/Shared/Footer";
-import Lottie from "lottie-react";
-import loaderAnimation from "../../public/loader.json";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Root = () => {
@@ -15,65 +13,88 @@ const Root = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col text-black">
+    <div className="min-h-screen flex flex-col text-black bg-black">
       <AnimatePresence mode="wait">
         {loading ? (
           <motion.div
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }} 
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#070b14]"
+            exit={{ 
+              opacity: 0, 
+              scale: 0.98, 
+              filter: "blur(8px)",
+              transition: { duration: 0.5, ease: "linear" } 
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#05070c]"
           >
-            {/* 🌌 Background Aura Glows */}
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-600/10 rounded-full blur-[120px] animate-pulse delay-700" />
+            {/* 🌌 Ambient Grid Overlay & Deep Space Glows */}
+            <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-15" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] animate-pulse" />
+            <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] animate-pulse delay-700" />
 
-            <div className="flex flex-col items-center relative z-10">
-              {/* Lottie Animation Wrapper with Glow */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring" }}
-                className="relative p-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-[0_0_50px_rgba(34,211,238,0.15)]"
-              >
-                <Lottie animationData={loaderAnimation} loop={true} className="w-36 h-36" />
-              </motion.div>
-
-              {/* ⚡ Futuristic Loading Text & Tech Subtitle */}
-              <motion.h2 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-lg font-black uppercase tracking-[0.4em] bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent mt-6 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]"
-              >
-                Initializing
-              </motion.h2>
+            <div className="flex flex-col items-center relative z-10 font-mono">
               
-              <p className="text-[10px] font-mono tracking-[0.2em] text-gray-500 uppercase mt-1">
-                Loading Digital Life Core...
-              </p>
+              {/* ⚛️ Geometric Cyber Grid Loader (3 Overlapping Rotating Rings) */}
+              <div className="relative w-24 h-24 mb-8 flex items-center justify-center">
+                {/* Outer Hex/Circle Tracker */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                  className="absolute inset-0 rounded-3xl border-2 border-dashed border-cyan-500/30 p-1"
+                />
+                
+                {/* Middle Tech Ring */}
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+                  className="absolute w-20 h-20 rounded-full border-2 border-t-cyan-400 border-r-transparent border-b-indigo-500 border-l-transparent"
+                />
 
-              {/* 📊 Cyberpunk Progress Bar Line */}
-              <div className="w-40 h-0.5 bg-white/5 rounded-full mt-4 overflow-hidden relative border border-white/5">
-                <motion.div 
-                  initial={{ left: "-100%" }}
-                  animate={{ left: "100%" }}
+                {/* Inner Core Pulse */}
+                <motion.div
+                  animate={{ scale: [0.8, 1.1, 0.8], opacity: [0.5, 1, 0.5] }}
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                  className="absolute top-0 bottom-0 w-1/2 bg-linear-to-r from-transparent via-cyan-400 to-blue-500"
+                  className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 shadow-[0_0_30px_rgba(34,211,238,0.6)] rotate-45"
                 />
               </div>
+
+              {/* ⚡ Status Text Diagnostics */}
+              <div className="text-center space-y-2">
+                <motion.h2 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-sm font-black uppercase tracking-[0.5em] bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                >
+                  SYSTEM CORE
+                </motion.h2>
+                
+                <div className="flex items-center justify-center gap-1.5 text-[9px] tracking-[0.2em] text-zinc-500 uppercase">
+                  <span className="w-1 h-1 rounded-full bg-cyan-400 animate-ping" />
+                  <span>Configuring Main Workspace Nexus...</span>
+                </div>
+              </div>
+
+              {/* 📊 Modern Segmented Tech Loading Line */}
+              <div className="w-44 h-1  rounded-full mt-6 overflow-hidden relative border border-zinc-800/40 p-[1px]">
+                <motion.div 
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
+                  className="absolute top-0 bottom-0 w-1/3 bg-linear-to-r from-transparent via-cyan-400 to-transparent"
+                />
+              </div>
+
             </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
-    
+      {/* ===== CORE APPLICATION MAIN ENTRY ===== */}
       {!loading && (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 1.01 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex-1 flex flex-col"
         >
           <header>
