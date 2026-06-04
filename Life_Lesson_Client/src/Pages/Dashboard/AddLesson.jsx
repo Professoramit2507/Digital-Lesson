@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
+import { Sparkles, FileText, Mail, Image as ImageIcon, Layers, Eye, ShieldAlert } from "lucide-react";
 
 const AddLesson = ({ userr }) => {
   const axiosSecure = useAxios();
@@ -42,14 +43,16 @@ const AddLesson = ({ userr }) => {
       return;
     }
 
-    
-
     Swal.fire({
       title: "Publish this lesson?",
       text: "You can edit it later",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, Publish 🚀",
+      background: "#09090b",
+      color: "#f4f4f5",
+      confirmButtonColor: "#0d9488",
+      cancelButtonColor: "#27272a",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -64,157 +67,173 @@ const AddLesson = ({ userr }) => {
 
           queryClient.invalidateQueries(["my-lesson", user?.email]);
 
-          Swal.fire("Published 🎉", "Your lesson is now live!", "success");
+          Swal.fire({
+            title: "Published 🎉",
+            text: "Your lesson is now live!",
+            icon: "success",
+            background: "#09090b",
+            color: "#f4f4f5",
+            confirmButtonColor: "#0d9488",
+          });
           setFormData(initData);
         } catch (err) {
-          toast.error("Failed to publish lesson",err);
+          toast.error("Failed to publish lesson", err);
         }
       }
     });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-6 flex items-center justify-center">
-      <div className="max-w-4xl w-full backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl p-10 border border-white/30">
-        
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-white drop-shadow">
-            ✨ Share Your Life Lesson
-          </h1>
-          <p className="text-white/80 mt-2">
-            Turn your experience into wisdom for others
-          </p>
-        </div>
+    <div className="max-w-3xl mx-auto space-y-10">
+      {/* Top Welcome Header */}
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight flex items-center gap-2.5">
+          <Sparkles className="w-6 h-6 text-teal-400" /> Share Your Life Lesson
+        </h1>
+        <p className="text-xs font-medium text-zinc-500 mt-1">
+          Turn your distinct experiences and realizations into structured wisdom for others.
+        </p>
+      </div>
 
-        <form className="space-y-7">
+      {/* Main Core Form Wrapper */}
+      <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        <form className="space-y-6" onSubmit={handlePublish}>
           {/* Title */}
-          <div>
-            <label className="block text-white font-semibold mb-1">
-              Lesson Title *
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+              <FileText className="w-3.5 h-3.5 text-zinc-500" /> Lesson Title *
             </label>
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="A lesson that changed my life..."
-              className="w-full px-5 py-3 rounded-xl bg-white/90 focus:ring-4 focus:ring-pink-400 outline-none"
+              placeholder="A paradigm shift that altered my core perspective..."
+              className="w-full px-4 py-3 rounded-xl bg-zinc-900/40 border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all"
             />
           </div>
 
           {/* Description */}
-          <div>
-            <label className="block text-white font-semibold mb-1">
-              Full Story *
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+              <FileText className="w-3.5 h-3.5 text-zinc-500" /> Full Story & Chronology *
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Describe your experience and what you learned..."
-              className="w-full px-5 py-3 rounded-xl bg-white/90 h-44 focus:ring-4 focus:ring-purple-400 outline-none"
+              placeholder="Deeply describe your experience, the contextual friction points, and what you derived..."
+              className="w-full px-4 py-3 rounded-xl bg-zinc-900/40 border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-600 h-44 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all resize-none"
             />
           </div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-white font-semibold mb-1">
-              Your Email
+          {/* Email Node Reference */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">
+              <Mail className="w-3.5 h-3.5 text-zinc-600" /> Author Session Identity
             </label>
             <input
               type="email"
               value={user?.email || ""}
               readOnly
-              className="w-full px-5 py-3 rounded-xl bg-gray-200 cursor-not-allowed"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-900/20 border border-zinc-900 text-sm text-zinc-500 cursor-not-allowed outline-none select-none"
             />
           </div>
 
-          {/* Image */}
-          <div>
-            <label className="block text-white font-semibold mb-1">
-              Lesson Image
+          {/* Image Node Stream */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+              <ImageIcon className="w-3.5 h-3.5 text-zinc-500" /> Lesson Resource Image URL
             </label>
             <input
               type="url"
               name="image"
               value={formData.image}
               onChange={handleChange}
-              placeholder="Paste image URL"
-              className="w-full px-5 py-3 rounded-xl bg-white/90"
+              placeholder="https://images.unsplash.com/photo-..."
+              className="w-full px-4 py-3 rounded-xl bg-zinc-900/40 border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all"
             />
             {formData.image && (
-              <img
-                src={formData.image}
-                alt="Preview"
-                className="mt-4 w-44 h-44 object-cover rounded-2xl shadow-lg border-4 border-white/60"
-              />
+              <div className="pt-2">
+                <div className="relative inline-block rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 p-1.5 shadow-xl">
+                  <img
+                    src={formData.image}
+                    alt="Resource Matrix Preview"
+                    className="w-40 h-40 object-cover rounded-xl"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                </div>
+              </div>
             )}
           </div>
 
-          {/* Category & Tone */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-white font-semibold mb-1">
-                Category *
+          {/* Category & Tone Block Split */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+                <Layers className="w-3.5 h-3.5 text-zinc-500" /> Taxonomy Category *
               </label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full px-5 py-3 rounded-xl bg-white/90"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-300 focus:outline-none focus:border-teal-500/50 transition-all appearance-none cursor-pointer"
               >
-                <option value="">Select category</option>
-                <option>Personal Growth</option>
-                <option>Career</option>
-                <option>Relationships</option>
-                <option>Mindset</option>
-                <option>Mistakes Learned</option>
+                <option value="" className="bg-zinc-950">Select category</option>
+                <option value="Personal Growth" className="bg-zinc-950">Personal Growth</option>
+                <option value="Career" className="bg-zinc-950">Career</option>
+                <option value="Relationships" className="bg-zinc-950">Relationships</option>
+                <option value="Mindset" className="bg-zinc-950">Mindset</option>
+                <option value="Mistakes Learned" className="bg-zinc-950">Mistakes Learned</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-white font-semibold mb-1">
-                Emotional Tone *
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-zinc-500" /> Emotional Resonance *
               </label>
               <select
                 name="tone"
                 value={formData.tone}
                 onChange={handleChange}
-                className="w-full px-5 py-3 rounded-xl bg-white/90"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-300 focus:outline-none focus:border-teal-500/50 transition-all appearance-none cursor-pointer"
               >
-                <option value="">Select tone</option>
-                <option>Motivational</option>
-                <option>Sad</option>
-                <option>Realization</option>
-                <option>Gratitude</option>
+                <option value="" className="bg-zinc-950">Select tone</option>
+                <option value="Motivational" className="bg-zinc-950">Motivational</option>
+                <option value="Sad" className="bg-zinc-950">Sad</option>
+                <option value="Realization" className="bg-zinc-950">Realization</option>
+                <option value="Gratitude" className="bg-zinc-950">Gratitude</option>
               </select>
             </div>
           </div>
 
-          {/* Privacy & Access */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-white font-semibold mb-1">
-                Privacy
+          {/* Privacy & Access Block Split */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+                <Eye className="w-3.5 h-3.5 text-zinc-500" /> Visibility Privacy
               </label>
               <select
                 name="privacy"
                 value={formData.privacy}
                 onChange={handleChange}
-                className="w-full px-5 py-3 rounded-xl bg-white/90"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-300 focus:outline-none focus:border-teal-500/50 transition-all appearance-none cursor-pointer"
               >
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
+                <option value="Public" className="bg-zinc-950">Public</option>
+                <option value="Private" className="bg-zinc-950">Private</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-white font-semibold mb-1 flex items-center gap-2">
-                Access Level
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <ShieldAlert className="w-3.5 h-3.5 text-zinc-500" /> Document Access Level
+                </span>
                 {!isPremium && (
-                  <span className="text-xs bg-yellow-300 text-yellow-900 px-2 py-0.5 rounded-full">
-                    Premium
+                  <span className="text-[9px] font-black tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md uppercase">
+                    Premium Required
                   </span>
                 )}
               </label>
@@ -223,23 +242,23 @@ const AddLesson = ({ userr }) => {
                 value={formData.accessLevel}
                 onChange={handleChange}
                 disabled={!isPremium}
-                className="w-full px-5 py-3 rounded-xl bg-white/90 disabled:bg-gray-200"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-300 focus:outline-none focus:border-teal-500/50 transition-all appearance-none disabled:bg-zinc-900/20 disabled:border-zinc-900/60 disabled:text-zinc-600 disabled:cursor-not-allowed"
               >
-                <option value="Free">Free</option>
-                <option value="Premium">Premium</option>
+                <option value="Free" className="bg-zinc-950">Free Tier Access</option>
+                <option value="Premium" className="bg-zinc-950">Premium Exclusive</option>
               </select>
             </div>
           </div>
 
-          {/* Submit */}
-          <button
-            onClick={handlePublish}
-            className="w-full py-4 rounded-2xl text-lg font-bold text-white
-              bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
-              hover:scale-105 transition-transform shadow-xl"
-          >
-            🚀 Publish Lesson
-          </button>
+          {/* Action Submission Trigger */}
+          <div className="pt-4">
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-xl bg-zinc-100 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest hover:bg-white border border-zinc-200 transition-all shadow-xl hover:shadow-zinc-100/5 active:scale-[0.99]"
+            >
+              Commit & Publish Shell
+            </button>
+          </div>
         </form>
       </div>
     </div>

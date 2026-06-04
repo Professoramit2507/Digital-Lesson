@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+import { User, Image as ImageIcon, ShieldCheck, Layers, Grid, Sparkles } from "lucide-react";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -13,129 +14,173 @@ const Profile = () => {
   const isPremium = user?.isPremium; 
   const savedLessonsCount = user?.savedLessons?.length || 0;
 
-useEffect(() => {
-  if (user?.email) {
-    axiosSecure
-      .get(`/my-lesson?email=${user.email}`)
-      .then((res) => setLessons(res.data))
-      .catch(console.error);
-  }
-}, [user?.email, axiosSecure]);
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure
+        .get(`/my-lesson?email=${user.email}`)
+        .then((res) => setLessons(res.data))
+        .catch(console.error);
+    }
+  }, [user?.email, axiosSecure]);
 
-
-const handleUpdateProfile = (e) => {
-  e.preventDefault();
-  console.log("Updated Name:", displayName);
-  console.log("Updated Photo:", photoURL);
-};
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+    console.log("Updated Name:", displayName);
+    console.log("Updated Photo:", photoURL);
+  };
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-indigo-50 to-purple-100">
-    
-      <div className="bg-white rounded-3xl shadow-xl p-8 mb-10">
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <img
-            src={user?.photoURL}
-            alt="Profile"
-            className="w-32 h-32 rounded-full border-4 border-indigo-500 shadow"
-          />
+    <div className="space-y-10">
+      {/* Top Welcome Header */}
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight flex items-center gap-3">
+          <User className="w-6 h-6 text-teal-400" /> Identity Matrix
+        </h1>
+        <p className="text-xs font-medium text-zinc-500 mt-1">
+          Manage your author credentials, view profile configurations, and index allocations.
+        </p>
+      </div>
 
-          <div className="flex-1 text-center md:text-left">
-            <h2  className="text-3xl font-bold text-indigo-700">
-              {user?.displayName}
+      {/* Main Core Profile Card Layer */}
+      <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="flex flex-col md:flex-row items-center gap-8 border-b border-zinc-900 pb-8">
+          {/* Avatar Container */}
+          <div className="relative group">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-teal-500 to-sky-500 opacity-30 blur-md group-hover:opacity-50 transition-opacity duration-300" />
+            <img
+              src={user?.photoURL || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"}
+              alt="Profile Identity"
+              className="relative w-28 h-28 rounded-full object-cover border-2 border-zinc-800 bg-zinc-900"
+            />
+          </div>
 
+          {/* User Metrics block */}
+          <div className="flex-1 text-center md:text-left space-y-2">
+            <div className="flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
+              <h2 className="text-xl sm:text-2xl font-serif font-black text-white tracking-tight">
+                {user?.displayName || "Anonymous Node"}
+              </h2>
               {isPremium && (
-                <span className="ml-2 text-yellow-500 text-xl">
-                   Premium
+                <span className="text-[10px] font-black tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded-md uppercase flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 fill-amber-400/20" /> Premium Author
                 </span>
               )}
-            </h2>
+            </div>
 
-            <p className="text-gray-500">{user?.email}</p>
+            <p className="text-xs font-medium text-zinc-500">{user?.email}</p>
 
-            <div className="flex justify-center md:justify-start gap-6 mt-4">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-indigo-600">
-                  {lessons.length}
-                </p>
-                <p className="text-sm text-gray-500">Lessons Created</p>
+            {/* Profile Counts Summary */}
+            <div className="flex justify-center md:justify-start gap-8 pt-2">
+              <div className="text-center md:text-left">
+                <p className="text-xl font-mono font-bold text-zinc-200">{lessons.length}</p>
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">Created</p>
               </div>
-
-              <div className="text-center">
-                <p className="text-2xl font-bold text-purple-600">
-                  {savedLessonsCount}
-                </p>
-                <p className="text-sm text-gray-500">Lessons Saved</p>
+              <div className="text-center md:text-left">
+                <p className="text-xl font-mono font-bold text-zinc-200">{savedLessonsCount}</p>
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">Bookmarked</p>
               </div>
             </div>
           </div>
         </div>
 
-       
-        <form
-          onSubmit={handleUpdateProfile}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8"
-        >
-          <input
-            type="text"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            placeholder="Display Name"
-            className="input input-bordered w-full"
-          />
+        {/* Configuration Forms */}
+        <form onSubmit={handleUpdateProfile} className="space-y-6 pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Display Name Input */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+                <User className="w-3.5 h-3.5 text-zinc-500" /> Identity Label
+              </label>
+              <input
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Display Name"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/40 border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all"
+              />
+            </div>
 
-          <input
-            type="text"
-            value={photoURL}
-            onChange={(e) => setPhotoURL(e.target.value)}
-            placeholder="Photo URL"
-            className="input input-bordered w-full"
-          />
+            {/* Photo URL Input */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+                <ImageIcon className="w-3.5 h-3.5 text-zinc-500" /> Avatar Image Vector URL
+              </label>
+              <input
+                type="text"
+                value={photoURL}
+                onChange={(e) => setPhotoURL(e.target.value)}
+                placeholder="Photo URL"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-900/40 border border-zinc-800 text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all"
+              />
+            </div>
+          </div>
 
-          <button className="btn col-span-1 md:col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white">
-            Update Profile
-          </button>
+          <div className="pt-2">
+            <button 
+              type="submit"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-zinc-100 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest hover:bg-white border border-zinc-200 transition-all shadow-xl hover:shadow-zinc-100/5 active:scale-[0.99]"
+            >
+              Update Registry State
+            </button>
+          </div>
         </form>
       </div>
 
-    
-      <div>
-        <h3 className="text-3xl font-bold mb-6 text-purple-700">
-          My Public Lessons
+      {/* Public Document Grid Section */}
+      <div className="space-y-6">
+        <h3 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+          <Grid className="w-4 h-4 text-zinc-500" /> Public Clusters Index
         </h3>
 
         {lessons.length === 0 ? (
-          <p className="text-gray-500">No lessons published yet.</p>
+          <div className="h-48 flex items-center justify-center text-xs text-zinc-600 border border-dashed border-zinc-900 rounded-3xl bg-zinc-950/20">
+            No published records discovered in this active node.
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {lessons
-              .sort(
-                (a, b) =>
-                  new Date(b.createdAt) - new Date(a.createdAt)
-              )
+            {[...lessons]
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((lesson) => (
                 <div
                   key={lesson._id}
-                  className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden"
+                  className="bg-zinc-950 border border-zinc-900/60 rounded-2xl overflow-hidden shadow-xl hover:border-zinc-800/80 hover:bg-zinc-900/10 transition-all group"
                 >
-                  <img
-                    src={lesson.image}
-                    alt={lesson.title}
-                    className="h-40 w-full object-cover"
-                  />
+                  {/* Card Media Preview */}
+                  <div className="h-40 w-full overflow-hidden bg-zinc-900 relative">
+                    <img
+                      src={lesson.image || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe"}
+                      alt={lesson.title}
+                      className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 group-hover:brightness-100"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                    <div className="absolute top-3 right-3">
+                      <span className="text-[9px] font-black tracking-wider bg-zinc-950/80 backdrop-blur-md text-zinc-400 border border-zinc-800/80 px-2 py-1 rounded-md uppercase">
+                        {lesson.privacy || "Public"}
+                      </span>
+                    </div>
+                  </div>
 
-                  <div className="p-4">
-                    <h4 className="text-lg font-semibold text-indigo-700">
-                      {lesson.title}
-                    </h4>
+                  {/* Card Content Shell */}
+                  <div className="p-5 space-y-3">
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-black tracking-widest text-teal-400 uppercase bg-teal-500/5 px-2 py-0.5 rounded border border-teal-500/10 inline-block">
+                        {lesson.category}
+                      </span>
+                      <h4 className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors truncate pt-1">
+                        {lesson.title}
+                      </h4>
+                    </div>
 
-                    <p className="text-sm text-gray-500 mt-1">
-                      {lesson.category}
-                    </p>
-
-                    <p className="text-xs text-gray-400 mt-2">
-                      {new Date(lesson.createdAt).toDateString()}
-                    </p>
+                    <div className="pt-2 border-t border-zinc-900/60 flex items-center justify-between text-[10px] font-medium text-zinc-500">
+                      <span className="flex items-center gap-1.5">
+                        <ShieldCheck className="w-3 h-3 text-zinc-600" /> {lesson.accessLevel || "Free"}
+                      </span>
+                      <span>
+                        {lesson.createdAt ? new Date(lesson.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "Recent"}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
