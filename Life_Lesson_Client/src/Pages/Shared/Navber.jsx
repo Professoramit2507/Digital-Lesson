@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import logoImg from "../../assets/imgaes/logo.jpg";
 import useAuth from "../../hooks/useAuth";
+import { Crown, Sparkles, LogOut, User, LayoutDashboard, Shield, Menu, X, ArrowUpRight } from "lucide-react";
 
 const Navbar = () => {
   const { user, dbUser, logOut, loading } = useAuth();
@@ -27,91 +28,103 @@ const Navbar = () => {
     }
   };
 
-  // ✨ Clean Light Mode Styling for Links
   const navLinkClass = ({ isActive }) =>
-    `relative text-xs font-bold tracking-widest uppercase px-4 py-2.5 transition-all duration-300 group
-     ${isActive ? "text-zinc-900" : "text-zinc-600 hover:text-zinc-900"}`;
+    `relative text-xs sm:text-[13px] font-bold tracking-wider uppercase px-4 py-2.5 transition-all duration-300 rounded-xl group flex items-center gap-2
+     ${
+       isActive
+         ? "text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 shadow-xs font-black"
+         : "text-zinc-400 hover:text-white hover:bg-white/5"
+     }`;
 
-  const links = (
-    <>
-      {[
-        { to: "/", label: "Home", end: true },
-        { to: "/public-lesson", label: "Public Lessons" },
-        { to: "/premium-lesson", label: "Premium Lessons" },
-        ...(user ? [{ to: "/dashboard", label: "Dashboard" }] : []),
-        ...(dbUser?.role === "admin"
-          ? [{ to: "/dashboard/admin", label: "Admin Panel" }]
-          : []),
-      ].map((link) => (
-        <li key={link.to} className="relative list-none">
-          <NavLink to={link.to} end={link.end} className={navLinkClass}>
-            {({ isActive }) => (
-              <>
-                <span className="relative z-10">{link.label}</span>
-                {/* 🌟 Bottom Animated Sliding Line */}
-                <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300
-                    ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
-                />
-              </>
-            )}
-          </NavLink>
-        </li>
-      ))}
-    </>
-  );
+  const navItems = [
+    { to: "/", label: "Home", end: true },
+    { to: "/public-lesson", label: "Public Lessons" },
+    { to: "/premium-lesson", label: "Premium Lessons", isPremiumBadge: true },
+    ...(user ? [{ to: "/dashboard", label: "Dashboard" }] : []),
+    ...(dbUser?.role === "admin"
+      ? [{ to: "/dashboard/admin", label: "Admin Panel" }]
+      : []),
+  ];
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-500 border-b
-        ${
-          isScrolled
-            ? "py-3 bg-white/90 backdrop-blur-xl border-zinc-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
-            : "py-5 bg-white/60 backdrop-blur-md border-zinc-100"
-        }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-500 border-b ${
+        isScrolled
+          ? "py-3 bg-[#05070c]/95 backdrop-blur-2xl border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.6)]"
+          : "py-4 bg-[#05070c]/80 backdrop-blur-md border-white/5"
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
-        {/* LEFT: Logo & Brand */}
-        <div className="flex items-center">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12">
+        {/* LEFT: Brand Logo */}
+        <div className="flex items-center shrink-0">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
-              {/* 🔄 Infinite Rotating Glow Ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 rounded-full blur-sm opacity-30 group-hover:opacity-80 group-hover:animate-spin duration-1000"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 rounded-full blur-xs opacity-50 group-hover:opacity-100 group-hover:animate-spin duration-1000 transition-opacity" />
               <img
-                className="relative w-10 h-10 rounded-full object-cover border border-zinc-200 shadow-xs"
+                className="relative w-10 h-10 rounded-full object-cover border border-zinc-700 shadow-md"
                 src={logoImg}
-                alt="logo"
+                alt="Digital Life Logo"
               />
             </div>
-            <span className="text-xl font-black tracking-tighter text-zinc-800 transition-all duration-300">
-              DIGITAL<span className="text-cyan-500">LIFE</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="text-lg font-black tracking-tighter text-white leading-none">
+                DIGITAL<span className="text-cyan-400">LIFE</span>
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">
+                Wisdom Hub
+              </span>
+            </div>
           </Link>
         </div>
 
-        {/* CENTER: Desktop Menu */}
+        {/* CENTER: Spaced-Out Desktop Menu Options (option gula dure) */}
         <div className="hidden lg:flex items-center">
-          <ul className="flex items-center gap-2">{links}</ul>
+          <ul className="flex items-center gap-6 xl:gap-8">
+            {navItems.map((item) => (
+              <li key={item.to} className="relative list-none">
+                <NavLink to={item.to} end={item.end} className={navLinkClass}>
+                  {({ isActive }) => (
+                    <>
+                      {item.isPremiumBadge && (
+                        <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400 shrink-0" />
+                      )}
+                      <span>{item.label}</span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse ml-0.5" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* RIGHT: User Profile & Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 shrink-0">
           {user ? (
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="relative flex items-center p-0.5 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                className="relative flex items-center gap-2.5 p-1.5 pr-3 rounded-full bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer group"
               >
-                <img
-                  src={user.photoURL || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"}
-                  alt="User"
-                  className="w-9 h-9 rounded-full object-cover border border-white"
-                />
-                {/* 🟢 Online Indicator */}
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full" />
+                <div className="relative">
+                  <img
+                    src={
+                      user.photoURL ||
+                      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
+                    }
+                    alt="User avatar"
+                    className="w-8 h-8 rounded-full object-cover border border-zinc-700"
+                  />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-zinc-950 rounded-full" />
+                </div>
+                <span className="hidden sm:inline text-xs font-bold text-zinc-200 group-hover:text-white max-w-28 truncate">
+                  {user.displayName || user.email?.split("@")[0]}
+                </span>
               </button>
 
-              {/* 🪟 Dropdown Menu */}
+              {/* Dark Glass Dropdown Menu */}
               {isDropdownOpen && (
                 <>
                   <div
@@ -119,40 +132,62 @@ const Navbar = () => {
                     onClick={() => setIsDropdownOpen(false)}
                   />
 
-                  <div className="absolute right-0 mt-3 w-60 bg-white border border-zinc-200/80 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-20 overflow-hidden backdrop-blur-xl origin-top-right transition-all duration-300 transform scale-100 animate-in zoom-in-95">
-                    <div className="px-5 py-4 bg-zinc-50/50 border-b border-zinc-100">
-                      <p className="text-sm font-bold text-zinc-800 truncate">
-                        {user.displayName}
+                  <div className="absolute right-0 mt-3 w-64 bg-zinc-950/95 border border-zinc-800 rounded-2xl shadow-2xl z-20 overflow-hidden backdrop-blur-2xl origin-top-right transition-all animate-in zoom-in-95">
+                    <div className="px-5 py-4 bg-zinc-900/60 border-b border-zinc-800/80">
+                      <p className="text-xs font-bold text-white truncate">
+                        {user.displayName || "Learner"}
                       </p>
-                      <p className="text-xs text-zinc-400 truncate mt-0.5 font-mono">
+                      <p className="text-[11px] text-zinc-400 truncate mt-0.5 font-mono">
                         {user.email}
                       </p>
+                      {dbUser?.role === "premium" && (
+                        <span className="inline-flex items-center gap-1 mt-2 text-[10px] font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">
+                          <Crown className="w-3 h-3 fill-amber-400" /> VIP Member
+                        </span>
+                      )}
                     </div>
 
-                    <div className="p-2 space-y-0.5">
-                      <Link
-                        to="/dashboard/profile"
-                        onClick={() => setIsDropdownOpen(false)}
-                        className="flex items-center px-4 py-2.5 text-sm text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 rounded-xl transition-all duration-200"
-                      >
-                        👤 My Profile
-                      </Link>
+                    <div className="p-2 space-y-1">
                       <Link
                         to="/dashboard"
                         onClick={() => setIsDropdownOpen(false)}
-                        className="flex items-center px-4 py-2.5 text-sm text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 rounded-xl transition-all duration-200"
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-900 rounded-xl transition-all"
                       >
-                        📊 Dashboard
+                        <LayoutDashboard className="w-4 h-4 text-cyan-400" />
+                        <span>My Dashboard</span>
                       </Link>
-                      <div className="h-px bg-zinc-100 my-1" />
+
+                      <Link
+                        to="/dashboard/profile"
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-900 rounded-xl transition-all"
+                      >
+                        <User className="w-4 h-4 text-blue-400" />
+                        <span>Profile Settings</span>
+                      </Link>
+
+                      {dbUser?.role === "admin" && (
+                        <Link
+                          to="/dashboard/admin"
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-900 rounded-xl transition-all"
+                        >
+                          <Shield className="w-4 h-4 text-purple-400" />
+                          <span>Admin Console</span>
+                        </Link>
+                      )}
+
+                      <div className="h-px bg-zinc-900 my-1" />
+
                       <button
                         onClick={() => {
                           handleLogOut();
                           setIsDropdownOpen(false);
                         }}
-                        className="w-full flex items-center px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200 font-semibold cursor-pointer"
+                        className="w-full flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-red-400 hover:bg-red-500/10 rounded-xl transition-all cursor-pointer"
                       >
-                        🚪 Log Out
+                        <LogOut className="w-4 h-4 text-red-400" />
+                        <span>Sign Out</span>
                       </button>
                     </div>
                   </div>
@@ -162,65 +197,64 @@ const Navbar = () => {
           ) : (
             <div className="hidden sm:flex items-center gap-3">
               <Link to="/login">
-                <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-bold cursor-pointer uppercase tracking-widest text-zinc-700 rounded-full group bg-gradient-to-br from-cyan-400 to-blue-500 transition duration-300">
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-full group-hover:bg-opacity-0 group-hover:text-white">
-                    Sign In
-                  </span>
+                <button className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-300 hover:text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 rounded-xl transition-all cursor-pointer">
+                  Sign In
                 </button>
               </Link>
               <Link to="/register">
-                <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-bold cursor-pointer uppercase tracking-widest text-white rounded-full group bg-gradient-to-br from-cyan-400 to-blue-500 transition duration-300 shadow-sm shadow-cyan-500/20 hover:shadow-md hover:shadow-cyan-500/30">
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full group-hover:from-cyan-400 group-hover:to-blue-500">
-                    Register
-                  </span>
+                <button className="px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-black bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 rounded-xl transition-all shadow-lg shadow-cyan-500/20 cursor-pointer">
+                  Register Free
                 </button>
               </Link>
             </div>
           )}
 
-          {/* Hamburger Menu Toggle */}
+          {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-zinc-500 hover:text-zinc-800 lg:hidden focus:outline-none transition duration-300 cursor-pointer"
+            className="p-2 text-zinc-400 hover:text-white lg:hidden focus:outline-none transition-colors cursor-pointer"
           >
-            <div className="w-6 h-5 flex flex-col justify-between items-end relative">
-              <span
-                className={`h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "w-6 rotate-45 translate-y-2" : "w-6"}`}
-              />
-              <span
-                className={`h-0.5 bg-current transition-all duration-200 ${isMobileMenuOpen ? "w-0 opacity-0" : "w-4"}`}
-              />
-              <span
-                className={`h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "w-6 -rotate-45 -translate-y-2" : "w-5"}`}
-              />
-            </div>
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-cyan-400" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
 
-      {/* 📱 Mobile Dropdown Menu (White Theme) */}
+      {/* Mobile Dark Dropdown */}
       <div
-        className={`lg:hidden absolute top-full left-0 w-full bg-white/98 border-b border-zinc-200 shadow-xl transition-all duration-500 ease-in-out overflow-hidden
-          ${isMobileMenuOpen ? "max-h-100 opacity-100 py-6 px-6" : "max-h-0 opacity-0 pointer-events-none"}`}
+        className={`lg:hidden absolute top-full left-0 w-full bg-[#05070c]/98 border-b border-zinc-800 shadow-2xl transition-all duration-300 ease-in-out overflow-hidden
+          ${isMobileMenuOpen ? "max-h-96 opacity-100 py-6 px-6" : "max-h-0 opacity-0 pointer-events-none"}`}
       >
         <ul
           className="flex flex-col gap-3"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          {links}
+          {navItems.map((item) => (
+            <li key={item.to} className="list-none">
+              <NavLink to={item.to} end={item.end} className={navLinkClass}>
+                {item.isPremiumBadge && (
+                  <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                )}
+                <span>{item.label}</span>
+              </NavLink>
+            </li>
+          ))}
           {!user && (
-            <div className="pt-4 border-t border-zinc-100 flex flex-col gap-2">
+            <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2">
               <Link
                 to="/login"
-                className="text-center text-sm font-bold text-zinc-700 py-2.5 hover:bg-zinc-50 rounded-xl transition-all"
+                className="text-center text-xs font-bold text-zinc-300 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl"
               >
                 Sign In
               </Link>
               <Link
                 to="/register"
-                className="text-center text-sm font-bold bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-xl shadow-xs"
+                className="text-center text-xs font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-black py-2.5 rounded-xl font-extrabold"
               >
-                Register
+                Register Free
               </Link>
             </div>
           )}

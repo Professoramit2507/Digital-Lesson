@@ -25,6 +25,42 @@ import PaymentSucces from "../Pages/Dashboard/PaymentSucces";
 import LessonDetails from "../Pages/Components/LessonDetails";
 import PrivateRoute from "./PrivateRoute";
 
+// Universal loader that retrieves lesson from DB first, then falls back to JSON
+const fetchLessonById = async (id) => {
+  // 1. Try to fetch from backend server (MongoDB _id)
+  try {
+    const apiRes = await fetch(`http://localhost:5000/lesson/${id}`);
+    if (apiRes.ok) {
+      const data = await apiRes.json();
+      if (data && (data._id || data.title)) return data;
+    }
+  } catch (err) {
+    console.warn("Backend lesson fetch failed, trying local JSON", err);
+  }
+
+  // 2. Try fetching from publicLesson.json
+  try {
+    const pubRes = await fetch("/publicLesson.json");
+    if (pubRes.ok) {
+      const pubData = await pubRes.json();
+      const found = pubData.find((item) => item.id == id || item._id == id);
+      if (found) return found;
+    }
+  } catch (e) {}
+
+  // 3. Try fetching from premium.json
+  try {
+    const premRes = await fetch("/premium.json");
+    if (premRes.ok) {
+      const premData = await premRes.json();
+      const found = premData.find((item) => item.id == id || item._id == id);
+      if (found) return found;
+    }
+  } catch (e) {}
+
+  return null;
+};
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -45,16 +81,12 @@ export const router = createBrowserRouter([
       {
         path: "public-lesson",
         element: <PublicLesson></PublicLesson>,
-        loader: () => fetch("publicLesson.json").then((res) => res.json()),
+        loader: () => fetch("/publicLesson.json").then((res) => res.json()),
       },
       {
         path: "/public-lesson/:id",
         element: <LessonDetails></LessonDetails>,
-        loader: async ({ params }) => {
-          const res = await fetch("/publicLesson.json");
-          const data = await res.json();
-          return data.find((item) => item.id == params.id);
-        },
+        loader: async ({ params }) => fetchLessonById(params.id),
       },
       {
         path: "premium-lesson",
@@ -63,16 +95,17 @@ export const router = createBrowserRouter([
             <Premimum></Premimum>
           </PrivateRoute>
         ),
-        loader: () => fetch("premium.json").then((res) => res.json()),
+        loader: () => fetch("/premium.json").then((res) => res.json()),
       },
       {
         path: "/premium-lesson/:id",
         element: <LessonDetails></LessonDetails>,
-        loader: async ({ params }) => {
-          const res = await fetch("/premium.json");
-          const data = await res.json();
-          return data.find((item) => item.id == params.id);
-        },
+        loader: async ({ params }) => fetchLessonById(params.id),
+      },
+      {
+        path: "/lesson-details/:id",
+        element: <LessonDetails></LessonDetails>,
+        loader: async ({ params }) => fetchLessonById(params.id),
       },
       {
         path: "update-lesson",

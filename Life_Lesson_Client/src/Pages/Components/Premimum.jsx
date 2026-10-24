@@ -1,900 +1,338 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router";
-// import useAxios from "../../hooks/useAxios";
-// import { Lock, Unlock, Sparkles, BookOpen } from "lucide-react";
-
-// const Premium = () => {
-//   const [isPremiumUser, setIsPremiumUser] = useState(false);
-//   const axios = useAxios();
-
-
-  
-
-//   const handlePayment = async () => {
-//   try {
-//     const res = await axios.post("/create-checkout-session");
-
-//     console.log("Checkout Response:", res.data);
-
-//     if (res.data?.url) {
-//       window.location.href = res.data.url;
-//     } else {
-//       alert("Checkout URL not found");
-//     }
-//   } catch (err) {
-//     console.error("Payment Error:", err);
-//     console.log("Server Error:", err.response?.data);
-
-//     alert(
-//       err.response?.data?.error ||
-//         err.response?.data?.message ||
-//         "Payment failed"
-//     );
-//   }
-// };
-
-//   const initialCards = [
-//     {
-//       id: 101,
-//       title: "Finding Inner Peace – Mastery Edition",
-//       shortDescription:
-//         "A deep, guided journey into lasting inner peace and emotional balance.",
-//       longDescription:
-//         "This premium lesson explores advanced meditation, mindfulness rituals, breathwork techniques, and emotional grounding practices designed to cultivate deep inner peace and resilience in daily life.",
-//       category: "Spirituality",
-//       emotionalTone: "Deeply Peaceful",
-//       creator: {
-//         name: "Peter Black",
-//         photo: "https://example.com/images/peter-black.jpg",
-//         credentials: "Certified Mindfulness Coach & Meditation Teacher",
-//       },
-//       accessLevel: "Premium",
-//       price: 19.99,
-//       duration: "2h 30m",
-//       premiumFeatures: [
-//         "Guided audio meditations",
-//         "Downloadable mindfulness workbook",
-//         "Daily peace rituals",
-//         "Lifetime access",
-//       ],
-//       createdDate: "2023-04-18",
-//       detailsLink: "/premium-life-lesson/101",
-//     },
-//     {
-//       id: 102,
-//       title: "Emotional Healing Blueprint",
-//       shortDescription: "Heal emotional wounds and restore inner harmony.",
-//       longDescription:
-//         "A transformational program focusing on emotional release, forgiveness practices, and self-compassion exercises.",
-//       category: "Emotional Wellness",
-//       emotionalTone: "Healing",
-//       creator: {
-//         name: "Sarah Collins",
-//         photo: "https://example.com/images/sarah-collins.jpg",
-//         credentials: "Emotional Wellness Therapist",
-//       },
-//       accessLevel: "Premium",
-//       price: 24.99,
-//       duration: "3h",
-//       premiumFeatures: [
-//         "Emotional release exercises",
-//         "Guided journaling prompts",
-//         "Therapeutic audio sessions",
-//       ],
-//       createdDate: "2023-05-10",
-//       detailsLink: "/premium-life-lesson/102",
-//     },
-//     {
-//       id: 103,
-//       title: "Mindfulness for High Performers",
-//       shortDescription: "Achieve peak focus without burnout.",
-//       longDescription:
-//         "Learn how to integrate mindfulness into high-pressure environments while maintaining clarity and balance.",
-//       category: "Mindfulness",
-//       emotionalTone: "Focused",
-//       creator: {
-//         name: "Daniel Wright",
-//         photo: "https://example.com/images/daniel-wright.jpg",
-//         credentials: "Performance Coach",
-//       },
-//       accessLevel: "Premium",
-//       price: 29.99,
-//       duration: "2h",
-//       premiumFeatures: [
-//         "Focus training sessions",
-//         "Stress management tools",
-//         "Performance tracking sheets",
-//       ],
-//       createdDate: "2023-06-02",
-//       detailsLink: "/premium-life-lesson/103",
-//     },
-//     {
-//       id: 104,
-//       title: "Self-Love & Confidence Masterclass",
-//       shortDescription: "Build unshakable confidence from within.",
-//       longDescription:
-//         "A premium masterclass focused on self-worth, confidence building, and eliminating self-doubt.",
-//       category: "Personal Growth",
-//       emotionalTone: "Empowering",
-//       creator: {
-//         name: "Emily Stone",
-//         photo: "https://example.com/images/emily-stone.jpg",
-//         credentials: "Self-Development Coach",
-//       },
-//       accessLevel: "Premium",
-//       price: 21.99,
-//       duration: "2h 15m",
-//       premiumFeatures: [
-//         "Confidence exercises",
-//         "Affirmation audios",
-//         "Self-reflection tools",
-//       ],
-//       createdDate: "2023-06-20",
-//       detailsLink: "/premium-life-lesson/104",
-//     },
-//     {
-//       id: 105,
-//       title: "Spiritual Awakening Path",
-//       shortDescription: "Awaken your higher consciousness.",
-//       longDescription:
-//         "Explore spiritual awareness, intuition development, and higher consciousness practices.",
-//       category: "Spirituality",
-//       emotionalTone: "Awakening",
-//       creator: {
-//         name: "Liam Harper",
-//         photo: "https://example.com/images/liam-harper.jpg",
-//         credentials: "Spiritual Guide",
-//       },
-//       accessLevel: "Premium",
-//       price: 34.99,
-//       duration: "4h",
-//       premiumFeatures: [
-//         "Guided awakening meditations",
-//         "Energy alignment practices",
-//         "Spiritual journaling",
-//       ],
-//       createdDate: "2023-07-05",
-//       detailsLink: "/premium-life-lesson/105",
-//     },
-//     {
-//       id: 106,
-//       title: "Overcoming Anxiety Naturally",
-//       shortDescription: "Practical tools to calm the anxious mind.",
-//       longDescription:
-//         "A step-by-step system to manage anxiety through mindfulness, breathing, and lifestyle changes.",
-//       category: "Mental Health",
-//       emotionalTone: "Calming",
-//       creator: {
-//         name: "Dr. Rachel Moore",
-//         photo: "https://example.com/images/rachel-moore.jpg",
-//         credentials: "Clinical Psychologist",
-//       },
-//       accessLevel: "Premium",
-//       price: 27.99,
-//       duration: "3h 30m",
-//       premiumFeatures: [
-//         "Anxiety relief techniques",
-//         "Breathing guides",
-//         "Progress tracking tools",
-//       ],
-//       createdDate: "2023-07-22",
-//       detailsLink: "/premium-life-lesson/106",
-//     },
-//     {
-//       id: 107,
-//       title: "The Art of Letting Go",
-//       shortDescription: "Release emotional baggage and move forward.",
-//       longDescription:
-//         "Learn how to release past pain, attachments, and limiting beliefs.",
-//       category: "Emotional Wellness",
-//       emotionalTone: "Liberating",
-//       creator: {
-//         name: "Anna Reed",
-//         photo: "https://example.com/images/anna-reed.jpg",
-//         credentials: "Life Coach",
-//       },
-//       accessLevel: "Premium",
-//       price: 18.99,
-//       duration: "2h",
-//       premiumFeatures: [
-//         "Letting-go rituals",
-//         "Guided reflection audios",
-//         "Emotional detox exercises",
-//       ],
-//       createdDate: "2023-08-01",
-//       detailsLink: "/premium-life-lesson/107",
-//     },
-//     {
-//       id: 108,
-//       title: "Morning Rituals for Inner Balance",
-//       shortDescription: "Start each day grounded and focused.",
-//       longDescription:
-//         "Design powerful morning rituals to set the tone for peace and productivity.",
-//       category: "Lifestyle",
-//       emotionalTone: "Balanced",
-//       creator: {
-//         name: "Michael Grant",
-//         photo: "https://example.com/images/michael-grant.jpg",
-//         credentials: "Wellness Strategist",
-//       },
-//       accessLevel: "Premium",
-//       price: 16.99,
-//       duration: "1h 45m",
-//       premiumFeatures: [
-//         "Customizable rituals",
-//         "Morning meditation audios",
-//         "Habit-building planner",
-//       ],
-//       createdDate: "2023-08-18",
-//       detailsLink: "/premium-life-lesson/108",
-//     },
-//     {
-//       id: 109,
-//       title: "Deep Relaxation & Stress Reset",
-//       shortDescription: "Reset your nervous system.",
-//       longDescription:
-//         "A deeply restorative experience using body scans, breathwork, and guided relaxation.",
-//       category: "Stress Management",
-//       emotionalTone: "Relaxing",
-//       creator: {
-//         name: "Sophia Lane",
-//         photo: "https://example.com/images/sophia-lane.jpg",
-//         credentials: "Relaxation Therapist",
-//       },
-//       accessLevel: "Premium",
-//       price: 22.99,
-//       duration: "2h 45m",
-//       premiumFeatures: [
-//         "Deep relaxation audios",
-//         "Stress reset routines",
-//         "Sleep enhancement guides",
-//       ],
-//       createdDate: "2023-09-01",
-//       detailsLink: "/premium-life-lesson/109",
-//     },
-//     {
-//       id: 110,
-//       title: "Building Mental Resilience",
-//       shortDescription: "Stay strong through life’s challenges.",
-//       longDescription:
-//         "Learn psychological tools to develop resilience, adaptability, and inner strength.",
-//       category: "Mental Strength",
-//       emotionalTone: "Motivational",
-//       creator: {
-//         name: "James Walker",
-//         photo: "https://example.com/images/james-walker.jpg",
-//         credentials: "Resilience Coach",
-//       },
-//       accessLevel: "Premium",
-//       price: 26.99,
-//       duration: "3h",
-//       premiumFeatures: [
-//         "Resilience training",
-//         "Mindset exercises",
-//         "Real-life case studies",
-//       ],
-//       createdDate: "2023-09-20",
-//       detailsLink: "/premium-life-lesson/110",
-//     },
-//     {
-//       id: 111,
-//       title: "Conscious Living Essentials",
-//       shortDescription: "Live with awareness and intention.",
-//       longDescription:
-//         "A holistic guide to mindful living, conscious choices, and intentional habits.",
-//       category: "Mindful Living",
-//       emotionalTone: "Awareness",
-//       creator: {
-//         name: "Olivia Brooks",
-//         photo: "https://example.com/images/olivia-brooks.jpg",
-//         credentials: "Conscious Living Mentor",
-//       },
-//       accessLevel: "Premium",
-//       price: 23.99,
-//       duration: "2h 30m",
-//       premiumFeatures: [
-//         "Lifestyle audits",
-//         "Mindful habit trackers",
-//         "Conscious living guides",
-//       ],
-//       createdDate: "2023-10-05",
-//       detailsLink: "/premium-life-lesson/111",
-//     },
-//     {
-//       id: 112,
-//       title: "Meditation Mastery Program",
-//       shortDescription: "From beginner to advanced meditation.",
-//       longDescription:
-//         "A complete meditation system covering techniques, posture, breath control, and deep states of awareness.",
-//       category: "Meditation",
-//       emotionalTone: "Serene",
-//       creator: {
-//         name: "Peter Black",
-//         photo: "https://example.com/images/peter-black.jpg",
-//         credentials: "Certified Meditation Teacher",
-//       },
-//       accessLevel: "Premium",
-//       price: 39.99,
-//       duration: "5h",
-//       premiumFeatures: [
-//         "Beginner to advanced lessons",
-//         "Guided and silent meditations",
-//         "Progress milestones",
-//       ],
-//       createdDate: "2023-10-22",
-//       detailsLink: "/premium-life-lesson/112",
-//     },
-//   ];
-
-//   return (
-//     <div className="min-h-screen px-4 sm:px-6 py-16 bg-black font-sans text-zinc-300 selection:bg-teal-950 selection:text-teal-200">
-//       <div className="max-w-7xl mx-auto">
-//         {/* Header Title */}
-//         <h2 className="text-4xl sm:text-5xl text-center font-serif font-black mb-4 text-white tracking-tight flex items-center justify-center gap-3">
-//           <Sparkles className="w-8 h-8 text-amber-400" /> Premium Lessons
-//         </h2>
-//         <p className="text-zinc-500 text-center max-w-md mx-auto text-sm font-medium mb-12">
-//           Unlock exclusive content engineered by professional coaches to
-//           optimize your mental blueprint.
-//         </p>
-
-//         {/* Dynamic CTA / Upgrade Banner */}
-//         <div className="text-center mb-16 bg-zinc-950 border border-zinc-900 rounded-4xl p-8 max-w-2xl mx-auto shadow-xl relative overflow-hidden">
-//           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl" />
-//           <h3 className="text-xl font-bold text-white mb-2">
-//             {isPremiumUser
-//               ? "Welcome to Premium Access"
-//               : "Get Unlimited Lifetime Access"}
-//           </h3>
-//           <p className="text-zinc-400 text-xs font-semibold mb-6 max-w-sm mx-auto">
-//             {isPremiumUser
-//               ? "All exclusive guides, masterclasses, and audio tools are now completely fully unlocked."
-//               : "Pay once, own forever. Unlock all 12 masterclasses including guides and printable resources."}
-//           </p>
-
-//           {!isPremiumUser && (
-//             <button
-//               onClick={handlePayment}
-//               className="px-10 py-4 text-sm font-black uppercase tracking-wider rounded-2xl bg-linear-to-r from-amber-500 to-orange-600 hover:from-amber-400
-//                hover:to-orange-500 text-white transition-all transform hover:scale-[1.02] shadow-lg shadow-orange-950/20 active:scale-98"
-//             >
-//               Upgrade to Premium
-//             </button>
-//           )}
-//         </div>
-
-//         {/* Grid System for Premium Lesson Cards */}
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-//           {initialCards.map((data) => (
-//             <div
-//               key={data.id}
-//               className="group relative bg-zinc-950 rounded-[30px] border border-zinc-900 shadow-2xl transition-all duration-500 flex flex-col justify-between overflow-hidden h-full hover:border-zinc-800"
-//             >
-//               {/* Header Segment inside Card */}
-//               <div>
-//                 <div className="h-32 bg-linear-to-b from-zinc-900 to-zinc-950 border-b border-zinc-900 p-6 flex flex-col justify-end relative">
-//                   <span className="absolute top-5 left-6 bg-zinc-950 text-teal-400 px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest border border-zinc-900">
-//                     {data.category}
-//                   </span>
-//                   {/* Absolute Badge showing Lock status */}
-//                   <div className="absolute top-5 right-6 text-zinc-600">
-//                     {isPremiumUser ? (
-//                       <Unlock className="w-4 h-4 text-teal-400" />
-//                     ) : (
-//                       <Lock className="w-4 h-4 text-amber-500/80" />
-//                     )}
-//                   </div>
-//                   <h3 className="font-serif font-black text-lg text-white line-clamp-1 group-hover:text-teal-400 transition-colors mt-2">
-//                     {data.title}
-//                   </h3>
-//                 </div>
-
-//                 {/* Info Metadata Details List */}
-//                 <div className="p-6 space-y-4">
-//                   <p className="text-zinc-400 text-xs leading-relaxed font-semibold min-h-10 line-clamp-2">
-//                     {data.shortDescription}
-//                   </p>
-
-//                   <div className="space-y-2 text-xs font-bold border-t border-b border-zinc-900/60 py-4">
-//                     <div className="flex justify-between items-center text-zinc-500">
-//                       <span>Emotional Tone</span>
-//                       <span className="text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded-md text-[11px] font-semibold">
-//                         {data.emotionalTone}
-//                       </span>
-//                     </div>
-//                     <div className="flex justify-between items-center text-zinc-500">
-//                       <span>Duration</span>
-//                       <span className="text-zinc-400 font-semibold">
-//                         {data.duration}
-//                       </span>
-//                     </div>
-//                     <div className="flex justify-between items-center text-zinc-500">
-//                       <span>Published</span>
-//                       <span className="text-zinc-500 font-semibold">
-//                         {data.createdDate}
-//                       </span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               {/* Action Access CTA Area */}
-//               <div className="p-6 pt-0 mt-auto">
-//                 {isPremiumUser ? (
-//                   <Link to={data.detailsLink} className="block w-full">
-//                     <button className="w-full py-3 bg-zinc-900 text-teal-400 border border-zinc-800 hover:bg-zinc-800 text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
-//                       <BookOpen className="w-3.5 h-3.5" /> Open Lesson
-//                     </button>
-//                   </Link>
-//                 ) : (
-//                   <button
-//                     onClick={handlePayment}
-//                     className="w-full py-3 bg-zinc-900/40 text-zinc-600 border border-zinc-900/80 hover:border-amber-500/20 hover:text-amber-400 hover:bg-amber-950/5 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 group-hover:bg-zinc-900"
-//                   >
-//                     <Lock className="w-3.5 h-3.5" /> Unlock with Premium
-//                   </button>
-//                 )}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Premium;
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAxios from "../../hooks/useAxios";
-import { Lock, Unlock, Sparkles, BookOpen } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
+import { Lock, Unlock, Sparkles, BookOpen, Crown, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+
+const initialCardsData = [
+  {
+    id: 101,
+    title: "Finding Inner Peace – Mastery Edition",
+    shortDescription:
+      "A deep, guided journey into lasting inner peace and emotional balance.",
+    longDescription:
+      "This premium lesson explores advanced meditation, mindfulness rituals, breathwork techniques, and emotional grounding practices designed to cultivate deep inner peace and resilience in daily life.",
+    category: "Spirituality",
+    emotionalTone: "Deeply Peaceful",
+    creator: {
+      name: "Peter Black",
+      photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      credentials: "Certified Mindfulness Coach & Meditation Teacher",
+    },
+    accessLevel: "Premium",
+    price: 19.99,
+    duration: "2h 30m",
+    createdDate: "2024-04-18",
+    detailsLink: "/premium-lesson/101",
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800",
+  },
+  {
+    id: 102,
+    title: "Emotional Healing Blueprint",
+    shortDescription: "Heal emotional wounds and restore inner harmony.",
+    longDescription:
+      "A transformational program focusing on emotional release, forgiveness practices, and self-compassion exercises.",
+    category: "Emotional Wellness",
+    emotionalTone: "Healing",
+    creator: {
+      name: "Sarah Collins",
+      photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+      credentials: "Emotional Wellness Therapist",
+    },
+    accessLevel: "Premium",
+    price: 24.99,
+    duration: "3h",
+    createdDate: "2024-05-10",
+    detailsLink: "/premium-lesson/102",
+    image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=800",
+  },
+  {
+    id: 103,
+    title: "Mindfulness for High Performers",
+    shortDescription: "Achieve peak focus without burnout.",
+    longDescription:
+      "Learn how to integrate mindfulness into high-pressure environments while maintaining clarity and balance.",
+    category: "Mindfulness",
+    emotionalTone: "Focused",
+    creator: {
+      name: "Daniel Wright",
+      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      credentials: "Performance Coach",
+    },
+    accessLevel: "Premium",
+    price: 29.99,
+    duration: "2h",
+    createdDate: "2024-06-02",
+    detailsLink: "/premium-lesson/103",
+    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=800",
+  },
+  {
+    id: 104,
+    title: "Self-Love & Confidence Masterclass",
+    shortDescription: "Build unshakable confidence from within.",
+    longDescription:
+      "A premium masterclass focused on self-worth, confidence building, and eliminating self-doubt.",
+    category: "Personal Growth",
+    emotionalTone: "Empowering",
+    creator: {
+      name: "Emily Stone",
+      photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+      credentials: "Self-Development Coach",
+    },
+    accessLevel: "Premium",
+    price: 21.99,
+    duration: "2h 15m",
+    createdDate: "2024-06-20",
+    detailsLink: "/premium-lesson/104",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800",
+  },
+];
 
 const Premium = () => {
+  const { user, dbUser } = useAuth();
   const [isPremiumUser, setIsPremiumUser] = useState(false);
+  const [cards, setCards] = useState(initialCardsData);
+  const [isProcessing, setIsProcessing] = useState(false);
   const axios = useAxios();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const localPremium = localStorage.getItem("premiumUser") === "true";
+    const rolePremium = dbUser?.role === "premium" || dbUser?.role === "admin";
+    setIsPremiumUser(localPremium || rolePremium);
+  }, [dbUser]);
 
- 
+  useEffect(() => {
+    const fetchPremiumLessons = async () => {
+      try {
+        const res = await axios.get("/premium-lessons");
+        if (res.data && Array.isArray(res.data) && res.data.length > 0) {
+          const dbCards = res.data.map((item) => ({
+            id: item._id,
+            _id: item._id,
+            title: item.title,
+            shortDescription:
+              item.description?.slice(0, 110) +
+                (item.description?.length > 110 ? "..." : "") ||
+              item.shortDescription,
+            longDescription: item.description,
+            category: item.category || "General Wisdom",
+            emotionalTone: item.emotionalTone || item.tone || "Empowering",
+            creator: item.creator || {
+              name: item.email?.split("@")[0] || "Community Contributor",
+              photo: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
+            },
+            accessLevel: item.accessLevel || "Premium",
+            duration: item.duration || "Self-paced",
+            createdDate: item.createdAt
+              ? new Date(item.createdAt).toLocaleDateString()
+              : "Recent",
+            detailsLink: `/premium-lesson/${item._id}`,
+            image:
+              item.image ||
+              item.img ||
+              "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1170",
+          }));
 
-useEffect(() => {
-  const premiumStatus = localStorage.getItem("premiumUser");
+          setCards([...dbCards, ...initialCardsData]);
+        }
+      } catch (err) {
+        console.warn("Could not load database premium lessons", err);
+      }
+    };
 
-  if (premiumStatus === "true") {
-    setIsPremiumUser(true);
-  }
-}, []);
+    fetchPremiumLessons();
+  }, [axios]);
 
   const handlePayment = async () => {
-  try {
-    const res = await axios.post("/create-checkout-session");
-
-    console.log("Checkout Response:", res.data);
-
-    if (res.data?.url) {
-      window.location.href = res.data.url;
-    } else {
-      alert("Checkout URL not found");
+    if (!user) {
+      toast.info("Please sign in to unlock premium membership.");
+      navigate("/login", { state: { from: "/premium-lesson" } });
+      return;
     }
-  } catch (err) {
-    console.error("Payment Error:", err);
-    console.log("Server Error:", err.response?.data);
 
-    alert(
-      err.response?.data?.error ||
+    setIsProcessing(true);
+    try {
+      const res = await axios.post("/create-checkout-session", {
+        email: user?.email,
+        name: user?.displayName || user?.email,
+      });
+
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+      } else {
+        toast.error("Checkout session could not be created. Please try again.");
+      }
+    } catch (err) {
+      console.error("Payment Error:", err);
+      const errMsg =
         err.response?.data?.message ||
-        "Payment failed"
-    );
-  }
-};
-
-  const initialCards = [
-    {
-      id: 101,
-      title: "Finding Inner Peace – Mastery Edition",
-      shortDescription:
-        "A deep, guided journey into lasting inner peace and emotional balance.",
-      longDescription:
-        "This premium lesson explores advanced meditation, mindfulness rituals, breathwork techniques, and emotional grounding practices designed to cultivate deep inner peace and resilience in daily life.",
-      category: "Spirituality",
-      emotionalTone: "Deeply Peaceful",
-      creator: {
-        name: "Peter Black",
-        photo: "https://example.com/images/peter-black.jpg",
-        credentials: "Certified Mindfulness Coach & Meditation Teacher",
-      },
-      accessLevel: "Premium",
-      price: 19.99,
-      duration: "2h 30m",
-      premiumFeatures: [
-        "Guided audio meditations",
-        "Downloadable mindfulness workbook",
-        "Daily peace rituals",
-        "Lifetime access",
-      ],
-      createdDate: "2023-04-18",
-      detailsLink: "/premium-life-lesson/101",
-    },
-    {
-      id: 102,
-      title: "Emotional Healing Blueprint",
-      shortDescription: "Heal emotional wounds and restore inner harmony.",
-      longDescription:
-        "A transformational program focusing on emotional release, forgiveness practices, and self-compassion exercises.",
-      category: "Emotional Wellness",
-      emotionalTone: "Healing",
-      creator: {
-        name: "Sarah Collins",
-        photo: "https://example.com/images/sarah-collins.jpg",
-        credentials: "Emotional Wellness Therapist",
-      },
-      accessLevel: "Premium",
-      price: 24.99,
-      duration: "3h",
-      premiumFeatures: [
-        "Emotional release exercises",
-        "Guided journaling prompts",
-        "Therapeutic audio sessions",
-      ],
-      createdDate: "2023-05-10",
-      detailsLink: "/premium-life-lesson/102",
-    },
-    {
-      id: 103,
-      title: "Mindfulness for High Performers",
-      shortDescription: "Achieve peak focus without burnout.",
-      longDescription:
-        "Learn how to integrate mindfulness into high-pressure environments while maintaining clarity and balance.",
-      category: "Mindfulness",
-      emotionalTone: "Focused",
-      creator: {
-        name: "Daniel Wright",
-        photo: "https://example.com/images/daniel-wright.jpg",
-        credentials: "Performance Coach",
-      },
-      accessLevel: "Premium",
-      price: 29.99,
-      duration: "2h",
-      premiumFeatures: [
-        "Focus training sessions",
-        "Stress management tools",
-        "Performance tracking sheets",
-      ],
-      createdDate: "2023-06-02",
-      detailsLink: "/premium-life-lesson/103",
-    },
-    {
-      id: 104,
-      title: "Self-Love & Confidence Masterclass",
-      shortDescription: "Build unshakable confidence from within.",
-      longDescription:
-        "A premium masterclass focused on self-worth, confidence building, and eliminating self-doubt.",
-      category: "Personal Growth",
-      emotionalTone: "Empowering",
-      creator: {
-        name: "Emily Stone",
-        photo: "https://example.com/images/emily-stone.jpg",
-        credentials: "Self-Development Coach",
-      },
-      accessLevel: "Premium",
-      price: 21.99,
-      duration: "2h 15m",
-      premiumFeatures: [
-        "Confidence exercises",
-        "Affirmation audios",
-        "Self-reflection tools",
-      ],
-      createdDate: "2023-06-20",
-      detailsLink: "/premium-life-lesson/104",
-    },
-    {
-      id: 105,
-      title: "Spiritual Awakening Path",
-      shortDescription: "Awaken your higher consciousness.",
-      longDescription:
-        "Explore spiritual awareness, intuition development, and higher consciousness practices.",
-      category: "Spirituality",
-      emotionalTone: "Awakening",
-      creator: {
-        name: "Liam Harper",
-        photo: "https://example.com/images/liam-harper.jpg",
-        credentials: "Spiritual Guide",
-      },
-      accessLevel: "Premium",
-      price: 34.99,
-      duration: "4h",
-      premiumFeatures: [
-        "Guided awakening meditations",
-        "Energy alignment practices",
-        "Spiritual journaling",
-      ],
-      createdDate: "2023-07-05",
-      detailsLink: "/premium-life-lesson/105",
-    },
-    {
-      id: 106,
-      title: "Overcoming Anxiety Naturally",
-      shortDescription: "Practical tools to calm the anxious mind.",
-      longDescription:
-        "A step-by-step system to manage anxiety through mindfulness, breathing, and lifestyle changes.",
-      category: "Mental Health",
-      emotionalTone: "Calming",
-      creator: {
-        name: "Dr. Rachel Moore",
-        photo: "https://example.com/images/rachel-moore.jpg",
-        credentials: "Clinical Psychologist",
-      },
-      accessLevel: "Premium",
-      price: 27.99,
-      duration: "3h 30m",
-      premiumFeatures: [
-        "Anxiety relief techniques",
-        "Breathing guides",
-        "Progress tracking tools",
-      ],
-      createdDate: "2023-07-22",
-      detailsLink: "/premium-life-lesson/106",
-    },
-    {
-      id: 107,
-      title: "The Art of Letting Go",
-      shortDescription: "Release emotional baggage and move forward.",
-      longDescription:
-        "Learn how to release past pain, attachments, and limiting beliefs.",
-      category: "Emotional Wellness",
-      emotionalTone: "Liberating",
-      creator: {
-        name: "Anna Reed",
-        photo: "https://example.com/images/anna-reed.jpg",
-        credentials: "Life Coach",
-      },
-      accessLevel: "Premium",
-      price: 18.99,
-      duration: "2h",
-      premiumFeatures: [
-        "Letting-go rituals",
-        "Guided reflection audios",
-        "Emotional detox exercises",
-      ],
-      createdDate: "2023-08-01",
-      detailsLink: "/premium-life-lesson/107",
-    },
-    {
-      id: 108,
-      title: "Morning Rituals for Inner Balance",
-      shortDescription: "Start each day grounded and focused.",
-      longDescription:
-        "Design powerful morning rituals to set the tone for peace and productivity.",
-      category: "Lifestyle",
-      emotionalTone: "Balanced",
-      creator: {
-        name: "Michael Grant",
-        photo: "https://example.com/images/michael-grant.jpg",
-        credentials: "Wellness Strategist",
-      },
-      accessLevel: "Premium",
-      price: 16.99,
-      duration: "1h 45m",
-      premiumFeatures: [
-        "Customizable rituals",
-        "Morning meditation audios",
-        "Habit-building planner",
-      ],
-      createdDate: "2023-08-18",
-      detailsLink: "/premium-life-lesson/108",
-    },
-    {
-      id: 109,
-      title: "Deep Relaxation & Stress Reset",
-      shortDescription: "Reset your nervous system.",
-      longDescription:
-        "A deeply restorative experience using body scans, breathwork, and guided relaxation.",
-      category: "Stress Management",
-      emotionalTone: "Relaxing",
-      creator: {
-        name: "Sophia Lane",
-        photo: "https://example.com/images/sophia-lane.jpg",
-        credentials: "Relaxation Therapist",
-      },
-      accessLevel: "Premium",
-      price: 22.99,
-      duration: "2h 45m",
-      premiumFeatures: [
-        "Deep relaxation audios",
-        "Stress reset routines",
-        "Sleep enhancement guides",
-      ],
-      createdDate: "2023-09-01",
-      detailsLink: "/premium-life-lesson/109",
-    },
-    {
-      id: 110,
-      title: "Building Mental Resilience",
-      shortDescription: "Stay strong through life’s challenges.",
-      longDescription:
-        "Learn psychological tools to develop resilience, adaptability, and inner strength.",
-      category: "Mental Strength",
-      emotionalTone: "Motivational",
-      creator: {
-        name: "James Walker",
-        photo: "https://example.com/images/james-walker.jpg",
-        credentials: "Resilience Coach",
-      },
-      accessLevel: "Premium",
-      price: 26.99,
-      duration: "3h",
-      premiumFeatures: [
-        "Resilience training",
-        "Mindset exercises",
-        "Real-life case studies",
-      ],
-      createdDate: "2023-09-20",
-      detailsLink: "/premium-life-lesson/110",
-    },
-    {
-      id: 111,
-      title: "Conscious Living Essentials",
-      shortDescription: "Live with awareness and intention.",
-      longDescription:
-        "A holistic guide to mindful living, conscious choices, and intentional habits.",
-      category: "Mindful Living",
-      emotionalTone: "Awareness",
-      creator: {
-        name: "Olivia Brooks",
-        photo: "https://example.com/images/olivia-brooks.jpg",
-        credentials: "Conscious Living Mentor",
-      },
-      accessLevel: "Premium",
-      price: 23.99,
-      duration: "2h 30m",
-      premiumFeatures: [
-        "Lifestyle audits",
-        "Mindful habit trackers",
-        "Conscious living guides",
-      ],
-      createdDate: "2023-10-05",
-      detailsLink: "/premium-life-lesson/111",
-    },
-    {
-      id: 112,
-      title: "Meditation Mastery Program",
-      shortDescription: "From beginner to advanced meditation.",
-      longDescription:
-        "A complete meditation system covering techniques, posture, breath control, and deep states of awareness.",
-      category: "Meditation",
-      emotionalTone: "Serene",
-      creator: {
-        name: "Peter Black",
-        photo: "https://example.com/images/peter-black.jpg",
-        credentials: "Certified Meditation Teacher",
-      },
-      accessLevel: "Premium",
-      price: 39.99,
-      duration: "5h",
-      premiumFeatures: [
-        "Beginner to advanced lessons",
-        "Guided and silent meditations",
-        "Progress milestones",
-      ],
-      createdDate: "2023-10-22",
-      detailsLink: "/premium-life-lesson/112",
-    },
-  ];
+        err.response?.data?.error ||
+        "Payment connection failed. Please ensure the server is active.";
+      toast.error(errMsg);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 py-16 bg-black font-sans text-zinc-300 selection:bg-teal-950 selection:text-teal-200">
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header Title */}
-        <h2 className="text-4xl sm:text-5xl text-center font-serif font-black mb-4 text-white tracking-tight flex items-center justify-center gap-3">
-          <Sparkles className="w-8 h-8 text-amber-400" /> Premium Lessons
-        </h2>
-        <p className="text-zinc-500 text-center max-w-md mx-auto text-sm font-medium mb-12">
-          Unlock exclusive content engineered by professional coaches to
-          optimize your mental blueprint.
-        </p>
+        {/* Header Title Section */}
+        <div className="text-center space-y-3 mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <Sparkles className="w-3.5 h-3.5" /> Exclusive Curriculum
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            Premium Life Lessons
+          </h1>
+          <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
+            Deep-dive masterclasses, audio guides, and mental blueprints crafted by world-class mentors.
+          </p>
+        </div>
 
         {/* Dynamic CTA / Upgrade Banner */}
-        <div className="text-center mb-16 bg-orange-600 border border-zinc-900 rounded-4xl p-8 max-w-2xl mx-auto  shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl" />
-          <h3 className="text-3xl font-bold text-white mb-2">
-          {isPremiumUser
-  ? "You Are Premium User "
-  : "Get Unlimited Lifetime Access"}
-          </h3>
-          <h3 className="text-white text-xl font-bold mb-6 max-w-sm mx-auto">
-            {isPremiumUser
-  ? "All premium lessons are unlocked for your account."
-  : "Pay once, own forever. Unlock all premium lessons."}
-          </h3>
+        <div className="mb-14 relative overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 p-8 sm:p-10 shadow-2xl text-center max-w-3xl mx-auto">
+          {/* Subtle Ambient Glow */}
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-amber-500/15 rounded-full blur-[100px] pointer-events-none" />
 
-          {!isPremiumUser && (
-            <button
-              onClick={handlePayment}
-              className="px-10 py-4 text-sm font-black uppercase tracking-wider rounded-2xl bg-linear-to-r from-amber-500 to-orange-600 hover:from-amber-400
-               hover:to-orange-500 text-white transition-all transform hover:scale-[1.02] shadow-lg shadow-orange-950/20 active:scale-98"
-            >
-              Upgrade to Premium
-            </button>
+          {isPremiumUser ? (
+            <div className="space-y-3">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-2">
+                <Crown className="w-7 h-7 fill-amber-400 text-amber-400" />
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                You Are a Premium Member 🎉
+              </h3>
+              <p className="text-sm text-zinc-400 max-w-md mx-auto">
+                All exclusive courses, audios, and masterclasses are completely unlocked for your account.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20">
+                <Crown className="w-3.5 h-3.5 fill-amber-400" /> Lifetime VIP Membership
+              </div>
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Unlock All Premium Masterclasses
+              </h3>
+              <p className="text-sm text-zinc-400 max-w-md mx-auto">
+                Pay once ($15.00) and get permanent lifetime access to all current and future premium lessons.
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-4 py-2 text-xs text-zinc-300 font-semibold">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" /> All Audio Guides
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Printable Blueprints
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Lifetime Access
+                </span>
+              </div>
+
+              <div className="pt-2">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handlePayment}
+                  disabled={isProcessing}
+                  className="px-8 py-3.5 text-xs font-black uppercase tracking-wider rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 mx-auto disabled:opacity-60 cursor-pointer"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-black" />
+                      <span>Connecting Stripe Checkout...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Crown className="w-4 h-4 fill-black text-black" />
+                      <span>Upgrade to Premium ($15.00)</span>
+                    </>
+                  )}
+                </motion.button>
+              </div>
+            </div>
           )}
         </div>
 
-        {/* Grid System for Premium Lesson Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {initialCards.map((data) => (
+        {/* Grid of Premium Lesson Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {cards.map((data) => (
             <div
-              key={data.id}
-              className="group relative bg-zinc-950 rounded-[30px] border border-zinc-900 shadow-2xl transition-all duration-500 flex flex-col justify-between overflow-hidden h-full hover:border-zinc-800"
+              key={data._id || data.id}
+              className="group relative bg-zinc-950/80 rounded-2xl border border-zinc-800/80 hover:border-zinc-700 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Header Segment inside Card */}
               <div>
-                <div className="h-32 bg-linear-to-b from-zinc-900 to-zinc-950 border-b border-zinc-900 p-6 flex flex-col justify-end relative">
-                  <span className="absolute top-5 left-6 bg-zinc-950 text-teal-400 px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest border border-zinc-900">
-                    {data.category}
-                  </span>
-                  {/* Absolute Badge showing Lock status */}
-                  <div className="absolute top-5 right-6 text-zinc-600">
-                    {isPremiumUser ? (
-                      <Unlock className="w-4 h-4 text-teal-400" />
-                    ) : (
-                      <Lock className="w-4 h-4 text-amber-500/80" />
-                    )}
+                {/* Header Segment with Cover Image */}
+                <div className="h-36 relative overflow-hidden bg-zinc-900 border-b border-zinc-800/80">
+                  <img
+                    src={data.image || "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1170"}
+                    alt={data.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-85"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1170";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+
+                  <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
+                    <span className="bg-zinc-950/80 backdrop-blur-md text-cyan-400 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border border-zinc-800">
+                      {data.category}
+                    </span>
+                    <div className="p-1.5 rounded-lg bg-zinc-950/80 backdrop-blur-md border border-zinc-800">
+                      {isPremiumUser ? (
+                        <Unlock className="w-3.5 h-3.5 text-emerald-400" />
+                      ) : (
+                        <Lock className="w-3.5 h-3.5 text-amber-400" />
+                      )}
+                    </div>
                   </div>
-                  <h3 className="font-serif font-black text-lg text-white line-clamp-1 group-hover:text-teal-400 transition-colors mt-2">
-                    {data.title}
-                  </h3>
                 </div>
 
-                {/* Info Metadata Details List */}
-                <div className="p-6 space-y-4">
-                  <p className="text-zinc-400 text-xs leading-relaxed font-semibold min-h-10 line-clamp-2">
+                {/* Info Metadata Details */}
+                <div className="p-5 space-y-3">
+                  <h3 className="font-bold text-base text-white line-clamp-1 group-hover:text-amber-400 transition-colors">
+                    {data.title}
+                  </h3>
+
+                  <p className="text-zinc-400 text-xs leading-relaxed font-normal min-h-9 line-clamp-2">
                     {data.shortDescription}
                   </p>
 
-                  <div className="space-y-2 text-xs font-bold border-t border-b border-zinc-900/60 py-4">
+                  <div className="space-y-1.5 text-xs border-t border-zinc-900 pt-3">
                     <div className="flex justify-between items-center text-zinc-500">
                       <span>Emotional Tone</span>
-                      <span className="text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded-md text-[11px] font-semibold">
+                      <span className="text-zinc-300 font-medium">
                         {data.emotionalTone}
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-zinc-500">
-                      <span>Duration</span>
-                      <span className="text-zinc-400 font-semibold">
-                        {data.duration}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center text-zinc-500">
-                      <span>Published</span>
-                      <span className="text-zinc-500 font-semibold">
-                        {data.createdDate}
+                      <span>Access</span>
+                      <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">
+                        {data.accessLevel}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Action Access CTA Area */}
-              <div className="p-6 pt-0 mt-auto">
+              {/* Action Button */}
+              <div className="p-5 pt-0 mt-auto">
                 {isPremiumUser ? (
                   <Link to={data.detailsLink} className="block w-full">
-                    <button className="w-full py-3 bg-zinc-900 text-teal-400 border border-zinc-800 hover:bg-zinc-800 text-xs font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                    <button className="w-full py-2.5 bg-zinc-900 hover:bg-zinc-800 text-cyan-400 border border-zinc-800 hover:border-cyan-500/40 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                       <BookOpen className="w-3.5 h-3.5" /> Open Lesson
                     </button>
                   </Link>
                 ) : (
                   <button
                     onClick={handlePayment}
-                    className="w-full py-3 bg-zinc-900/40 text-zinc-600 border border-zinc-900/80 hover:border-amber-500/20 hover:text-amber-400 hover:bg-amber-950/5 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 group-hover:bg-zinc-900"
+                    disabled={isProcessing}
+                    className="w-full py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 hover:border-amber-500/40 text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
                   >
                     <Lock className="w-3.5 h-3.5" /> Unlock with Premium
                   </button>

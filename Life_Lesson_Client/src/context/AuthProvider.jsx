@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { AuthContext } from "./AuthContext";
@@ -14,41 +15,43 @@ import useAxios from "../hooks/useAxios";
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);      // Firebase user
-  const [dbUser, setDbUser] = useState(null);  // Database user (role etc.)
+  const [user, setUser] = useState(null); // Firebase user
+  const [dbUser, setDbUser] = useState(null); // Database user (role etc.)
   const [loading, setLoading] = useState(true);
 
   const axios = useAxios();
 
   // 🔹 Save user to DB (only if not exists)
-  const saveUser = async (firebaseUser) => {
+  const saveUser = async (firebaseUser, additionalData = {}) => {
     try {
       await axios.post("/users", {
         email: firebaseUser.email,
-        name: firebaseUser.displayName,
+        name: additionalData.name || firebaseUser.displayName || "",
+        photo: additionalData.photo || firebaseUser.photoURL || "",
         role: "user",
       });
     } catch (err) {
-      // ignore duplicate user error
       console.error(err?.response?.data || err.message);
     }
   };
 
   // 🔹 Refetch DB user (for role update etc.)
   const refetchUser = async (email) => {
+    if (!email) return;
     try {
       const res = await axios.get(`/users/${encodeURIComponent(email)}`);
       setDbUser(res.data);
+      return res.data;
     } catch (err) {
       console.error(err);
     }
   };
 
-  // 🔹 Auth state listener (MOST IMPORTANT PART)
+  // 🔹 Auth state listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        setUser(currentUser); // ✅ Firebase user
+        setUser(currentUser);
         await saveUser(currentUser);
 
         try {
@@ -77,6 +80,14 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  const updateUserProfile = (name, photo) => {
+    if (!auth.currentUser) return Promise.resolve();
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
   const signInUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -94,14 +105,16 @@ const AuthProvider = ({ children }) => {
 
   // 🔹 Context value
   const authInfo = {
-    user,       // firebase user
-    dbUser,     // database user (role)
+    user,
+    dbUser,
     loading,
     registerUser,
+    updateUserProfile,
     signInUser,
     googleSignIn,
     logOut,
     refetchUser,
+    saveUser,
   };
 
   return (
